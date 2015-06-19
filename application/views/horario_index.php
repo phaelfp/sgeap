@@ -107,7 +107,7 @@
 					var id_anoletivo = jQuery('#id_anoletivo').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'curso/getCurso',
+				        url: '<?php echo base_url(); ?>index.php/curso/getCurso',
 				        data: {id_anoletivo:id_anoletivo}
 					}).done(function(response){
 						var cursos = JSON.parse(response);
@@ -124,7 +124,7 @@
 					var id_curso = jQuery('#id_curso').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'serie/getSerie',
+				        url: '<?php echo base_url(); ?>index.php/serie/getSerie',
 				        data: {id_anoletivo:id_anoletivo,id_curso:id_curso}
 					}).done(function(response){
 						var series = JSON.parse(response);
@@ -142,7 +142,7 @@
 					var id_serie = jQuery('#id_serie').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'turma/getTurma',
+				        url: '<?php echo base_url(); ?>index.php/turma/getTurma',
 				        data: {id_anoletivo:id_anoletivo,id_curso:id_curso,id_serie:id_serie}
 					}).done(function(response){
 						var turmas = JSON.parse(response);
@@ -158,7 +158,7 @@
 					var id_turma = jQuery('#id_turma').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'horario/getDisciplina',
+				        url: '<?php echo base_url(); ?>index.php/horario/getDisciplina',
 				        data: {id_turma:id_turma}
 					}).done(function(response){
 						var disciplinas = JSON.parse(response);
@@ -182,7 +182,7 @@
 					var n_tempos = jQuery('#n_tempos').val();
 					jQuery.ajax({
 						type: 'POST',
-						url: 'horario/salvarHorario',
+						url: '<?php echo base_url(); ?>index.php/horario/salvarHorario',
 						data: {id_turma:id_turma,id_disciplina:id_disciplina,id_dia_semana:id_dia_semana,id_horario:id_horario,n_tempos:n_tempos}
 					}).done(function(response){
 						loadTable();
@@ -199,7 +199,7 @@
    				jQuery('#id_disciplina_horario').val(id_disciplina);
    				jQuery.ajax({
    					type: 'POST',
-   					url: 'horario/getHorario',
+   					url: '<?php echo base_url(); ?>index.php/horario/getHorario',
    					data: {id_turma:id_turma,id_disciplina:id_disciplina}
 				}).done(function(response){
 					jQuery('#id_dia_horario').val(response);
@@ -218,7 +218,7 @@
 				{
 					jQuery.ajax({
 						type: 'GET',
-						url: 'horario/deletarHorario/'+id_dia_horario,
+						url: '<?php echo base_url(); ?>index.php/horario/deletarHorario/'+id_dia_horario,
 					}).done(function(response){
 						var alert_text = '<div role="alert" class="alert alert-success alert-dismissible fade in">\r\n<button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button>\r\n<strong>'+response+'</strong>\r\n</div>';
 						jQuery('#alert').append(alert_text);
