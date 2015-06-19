@@ -5,7 +5,7 @@ class disciplina_model extends CI_Model {
 	public function __construct()
     {
         parent::__construct();
-		$this->table_name = 'disciplina';
+		$this->table_name = 'Disciplina';
     }
 
     public function getAll()
