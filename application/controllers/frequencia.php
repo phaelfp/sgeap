@@ -33,18 +33,19 @@ class Frequencia extends CI_Controller {
 		$id_disciplina = $this->input->post('id_disciplina');
 		$id_dia_semana = date('w') + 1;
 		$dt_aula = date('Y-m-d H:m:s');
+		$alunos = $this->frequencia_model->getAlunoJSON($id_turma);
 		$id_aluno = $this->input->post('id_aluno');
 
-		foreach($id_aluno as $i => $id):
+		foreach($alunos as $i => $aluno):
 			$data = array(
 				'id_turma' => $id_turma,
 				'id_disciplina' => $id_disciplina,
 				'id_dia_semana' => $id_dia_semana,
-				'dt_aula' => $dt_aula,
-				'id_aluno' => $id,
-				'is_presente' => '1',
+				'dt_aula' => "'{$dt_aula}'",
+				'id_aluno' => $aluno['id'],
+				'is_presente' => in_array($aluno['id'], $id_aluno)?'1':'0',
 			);
-			$this->frequencia_model->insert($data);
+   			$this->frequencia_model->insert($data);
 		endforeach;
 
 		$this->index();

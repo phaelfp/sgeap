@@ -156,6 +156,7 @@
 						url: '<?php echo base_url(); ?>index.php/frequencia/getAluno',
 						data: {id_turma:id_turma}
 					}).done(function(response){
+						jQuery('#detail').html('');
 						var alunos = JSON.parse(response);
 						for(i in alunos)
 						{
