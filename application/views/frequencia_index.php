@@ -86,7 +86,7 @@
 					var id_anoletivo = jQuery('#id_anoletivo').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'curso/getCurso',
+				        url: '<?php echo base_url(); ?>index.php/curso/getCurso',
 				        data: {id_anoletivo:id_anoletivo}
 					}).done(function(response){
 						var cursos = JSON.parse(response);
@@ -103,7 +103,7 @@
 					var id_curso = jQuery('#id_curso').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'serie/getSerie',
+				        url: '<?php echo base_url(); ?>index.php/serie/getSerie',
 				        data: {id_anoletivo:id_anoletivo,id_curso:id_curso}
 					}).done(function(response){
 						var series = JSON.parse(response);
@@ -121,7 +121,7 @@
 					var id_serie = jQuery('#id_serie').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'turma/getTurma',
+				        url: '<?php echo base_url(); ?>index.php/turma/getTurma',
 				        data: {id_anoletivo:id_anoletivo,id_curso:id_curso,id_serie:id_serie}
 					}).done(function(response){
 						var turmas = JSON.parse(response);
@@ -137,7 +137,7 @@
 					var id_turma = jQuery('#id_turma').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'horario/getDisciplina',
+				        url: '<?php echo base_url(); ?>index.php/horario/getDisciplina',
 				        data: {id_turma:id_turma}
 					}).done(function(response){
 						var disciplinas = JSON.parse(response);
@@ -153,7 +153,7 @@
 					var id_turma = jQuery('#id_turma').val();
 					jQuery.ajax({
 						type: 'POST',
-						url: 'frequencia/getAluno',
+						url: '<?php echo base_url(); ?>index.php/frequencia/getAluno',
 						data: {id_turma:id_turma}
 					}).done(function(response){
 						var alunos = JSON.parse(response);
