@@ -1,6 +1,6 @@
 <div class="container" role="main">
 	<div class="row">
-		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/Turma/edit" role="button">Nova Turma</a>
+		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/turma/edit" role="button">Nova Turma</a>
 	</div>
 	<div class="row">
 		<table class="table table-striped">
