@@ -13,7 +13,7 @@ class Matricula extends CI_Controller {
 		
 		$body = array();
 		$body['anoletivo'] = $this->anoletivo_model->getAll();
-		$body['action'] = base_url() .'index.php/Matricula/save';
+		$body['action'] = base_url() .'index.php/matricula/save';
 		if (!empty($msg)):
 			if (substr($msg,0,4) === 'Erro'):
 				$body['error'] = $msg;

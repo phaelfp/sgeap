@@ -29,7 +29,7 @@ class Disciplina extends CI_Controller {
 		endif;
 	    	$item = $this->disciplina_model->getId($id);
 		$body = array();
-		$body['action'] = base_url() .'index.php/Disciplina/save';
+		$body['action'] = base_url() .'index.php/disciplina/save';
 		$body['disciplina'] = $item;
 		$this->load->view('disciplina_form', $body);
 		$this->load->view('footer');   
@@ -64,7 +64,7 @@ class Disciplina extends CI_Controller {
 			$body['success'] = $msg;
 		endif;
 
-		$body['action'] = base_url() .'index.php/Disciplina/save';
+		$body['action'] = base_url() .'index.php/disciplina/save';
 		$body['disciplina'] = (object)$data;
 		$this->load->view('disciplina_form', $body);
 		$this->load->view('footer');   

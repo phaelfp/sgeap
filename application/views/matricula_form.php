@@ -136,7 +136,7 @@
 					var id_anoletivo = jQuery('#id_anoletivo').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'Curso/getCurso',
+				        url: 'curso/getCurso',
 				        data: {id_anoletivo:id_anoletivo}
 					}).done(function(response){
 						var cursos = JSON.parse(response);
@@ -153,7 +153,7 @@
 					var id_curso = jQuery('#id_curso').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'Serie/getSerie',
+				        url: 'serie/getSerie',
 				        data: {id_anoletivo:id_anoletivo,id_curso:id_curso}
 					}).done(function(response){
 						var series = JSON.parse(response);
@@ -171,7 +171,7 @@
 					var id_serie = jQuery('#id_serie').val();
 					jQuery.ajax({
 						type: 'POST',
-				        url: 'Turma/getTurma',
+				        url: 'turma/getTurma',
 				        data: {id_anoletivo:id_anoletivo,id_curso:id_curso,id_serie:id_serie}
 					}).done(function(response){
 						var turmas = JSON.parse(response);

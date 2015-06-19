@@ -29,7 +29,7 @@ class Curso extends CI_Controller {
 		endif;
 	    	$item = $this->curso_model->getId($id);
 		$body = array();
-		$body['action'] = base_url() .'index.php/Curso/save';
+		$body['action'] = base_url() .'index.php/curso/save';
 		$body['curso'] = $item;
 		$this->load->view('curso_form', $body);
 		$this->load->view('footer');   
@@ -62,7 +62,7 @@ class Curso extends CI_Controller {
 			$body['success'] = $msg;
 		endif;
 
-		$body['action'] = base_url() .'index.php/Curso/save';
+		$body['action'] = base_url() .'index.php/curso/save';
 		$body['curso'] = (object)$data;
 		$this->load->view('curso_form', $body);
 		$this->load->view('footer');   

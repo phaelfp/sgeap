@@ -14,22 +14,22 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastro<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="<?php echo base_url()?>index.php/AnoLetivo">Ano Letivo</a></li>
-            <li><a href="<?php echo base_url()?>index.php/Serie">S&eacute;rie</a></li>
-            <li><a href="<?php echo base_url()?>index.php/Curso">Curso</a></li>
+            <li><a href="<?php echo base_url()?>index.php/anoletivo">Ano Letivo</a></li>
+            <li><a href="<?php echo base_url()?>index.php/serie">S&eacute;rie</a></li>
+            <li><a href="<?php echo base_url()?>index.php/curso">Curso</a></li>
             <li class="divider"></li>
-            <li><a href="<?php echo base_url()?>index.php/Disciplina">Disciplina</a></li>
-            <li><a href="<?php echo base_url()?>index.php/Turma">Turma</a></li>
-            <li><a href="<?php echo base_url()?>index.php/Horario">Horario</a></li>
+            <li><a href="<?php echo base_url()?>index.php/disciplina">Disciplina</a></li>
+            <li><a href="<?php echo base_url()?>index.php/turma">Turma</a></li>
+            <li><a href="<?php echo base_url()?>index.php/horario">Horario</a></li>
             <li class="divider"></li>
-            <li><a href="<?php echo base_url()?>index.php/Aluno">Aluno</a></li>
+            <li><a href="<?php echo base_url()?>index.php/aluno">Aluno</a></li>
           </ul>
         </li>
         <li class="dropdown">
-			<a href="<?php echo base_url()?>index.php/Matricula">Matr&iacute;cula</a>
+			<a href="<?php echo base_url()?>index.php/matricula">Matr&iacute;cula</a>
         </li>
         <li class="dropdown">
-			<a href="<?php echo base_url()?>index.php/Frequencia">Frequ&ecirc;ncia</a>
+			<a href="<?php echo base_url()?>index.php/frequencia">Frequ&ecirc;ncia</a>
         </li>
       </ul>
     </div>

@@ -29,7 +29,7 @@ class Turma extends CI_Controller {
 		$this->load->model('disciplina_model');
 	    $item = $this->turma_model->getId($id);
 		$body = array();
-		$body['action'] = base_url() .'index.php/Turma/update';
+		$body['action'] = base_url() .'index.php/turma/update';
 		$body['turma'] = $item;
 		$body['oferecimento'] = $this->oferecimento_model->get_enabled($id);
 		$body['disciplinas'] = $this->disciplina_model->getAll();
@@ -71,7 +71,7 @@ class Turma extends CI_Controller {
 		endif;
 	    	$item = $this->turma_model->getId($id);
 		$body = array();
-		$body['action'] = base_url() .'index.php/Turma/save';
+		$body['action'] = base_url() .'index.php/turma/save';
 		$body['turma'] = $item;
 		$body['anoletivo'] = $this->anoletivo_model->getCombo();
 		$body['serie'] = $this->serie_model->getCombo();
@@ -113,7 +113,7 @@ class Turma extends CI_Controller {
 			$body['success'] = $msg;
 		endif;
 
-		$body['action'] = base_url() .'index.php/Turma/save';
+		$body['action'] = base_url() .'index.php/turma/save';
 		$body['turma'] = (object)$data;
 		$body['anoletivo'] = $this->anoletivo_model->getCombo();
 		$body['serie'] = $this->serie_model->getCombo();

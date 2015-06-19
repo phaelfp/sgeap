@@ -29,7 +29,7 @@ class AnoLetivo extends CI_Controller {
 		endif;
 	    	$item = $this->anoletivo_model->getId($id);
 		$body = array();
-		$body['action'] = base_url() .'index.php/AnoLetivo/save';
+		$body['action'] = base_url() .'index.php/anoletivo/save';
 		$body['anoletivo'] = $item;
 		$this->load->view('anoletivo_form', $body);
 		$this->load->view('footer');   
@@ -65,7 +65,7 @@ class AnoLetivo extends CI_Controller {
 			$body['success'] = $msg;
 		endif;
 
-		$body['action'] = base_url() .'index.php/AnoLetivo/save';
+		$body['action'] = base_url() .'index.php/anoletivo/save';
 		$body['anoletivo'] = (object)$data;
 		$this->load->view('anoletivo_form', $body);
 		$this->load->view('footer');   

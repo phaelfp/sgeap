@@ -30,7 +30,7 @@ class Aluno extends CI_Controller {
 		endif;
 	    	$item = $this->aluno_model->getId($id);
 		$body = array();
-		$body['action'] = base_url() .'index.php/Aluno/save';
+		$body['action'] = base_url() .'index.php/aluno/save';
 		$body['aluno'] = $item;
 		$this->load->view('aluno_form', $body);
 		$this->load->view('footer');   
@@ -98,7 +98,7 @@ TXT;
 			$body['success'] = $msg;
 		endif;
 
-		$body['action'] = base_url() .'index.php/Aluno/save';
+		$body['action'] = base_url() .'index.php/aluno/save';
 		$body['aluno'] = (object)$data;
 		$this->load->view('aluno_form', $body);
 		$this->load->view('footer');   

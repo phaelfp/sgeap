@@ -1,7 +1,7 @@
 <div class="container" role="main">
 	<div id="alert"></div>
 	<div class="row">
-		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/Aluno/edit" role="button">Novo Aluno</a>
+		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/aluno/edit" role="button">Novo Aluno</a>
 	</div>
 	<div class="row">
 		<table class="table table-striped">
@@ -18,12 +18,12 @@
 					<div class="btn-group visible-xs-block">
 					  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Opções<span class="caret"></span></button>
 					  <ul class="dropdown-menu">
-					    <li><a href="<?php echo base_url();?>index.php/Aluno/edit/<?php echo $item->id ;?>">Editar</a></li>
+					    <li><a href="<?php echo base_url();?>index.php/aluno/edit/<?php echo $item->id ;?>">Editar</a></li>
 					    <li><a href="#">Excluir</a></li>
 					  </ul>
 					</div>
 					<div class="btn-group hidden-xs">
-						<a class="btn btn-sm btn-info" href="<?php echo base_url();?>index.php/Aluno/edit/<?php echo $item->id ;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+						<a class="btn btn-sm btn-info" href="<?php echo base_url();?>index.php/aluno/edit/<?php echo $item->id ;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 						<a class="btn btn-sm btn-danger delete-aluno" href="#" data-id="<?php echo $item->id;?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 					</div>
 				</td>
@@ -36,7 +36,7 @@
 		</table>
 	</div>
 	<div class="row">
-		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/Aluno/edit" role="button">Novo Aluno</a>
+		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/aluno/edit" role="button">Novo Aluno</a>
 	</div>
 <div>
 <script>
@@ -47,7 +47,7 @@
 				var id_aluno = jQuery(this).attr('data-id');
 	   			jQuery.ajax({
 	   		   		type: 'POST',
-	   		   		url: 'Aluno/delete',
+	   		   		url: 'aluno/delete',
 	   		   		data: {id:id_aluno}
 				}).done(function(response){
 					if (-1 > response.lastIndexOf('success'))

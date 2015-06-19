@@ -29,7 +29,7 @@ class Serie extends CI_Controller {
 		endif;
 	    	$item = $this->serie_model->getId($id);
 		$body = array();
-		$body['action'] = base_url() .'index.php/Serie/save';
+		$body['action'] = base_url() .'index.php/serie/save';
 		$body['serie'] = $item;
 		$body['series'] = $this->serie_model->getAll();
 		$this->load->view('serie_form', $body);
@@ -63,7 +63,7 @@ class Serie extends CI_Controller {
 			$body['success'] = $msg;
 		endif;
 
-		$body['action'] = base_url() .'index.php/Serie/save';
+		$body['action'] = base_url() .'index.php/serie/save';
 		$body['serie'] = (object)$data;
 		$body['series'] = $this->serie_model->getAll();
 		$this->load->view('serie_form', $body);
