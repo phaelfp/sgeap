@@ -63,6 +63,7 @@ class AnoLetivo extends CI_Controller {
 			$body['error'] = $msg;
 		else:
 			$body['success'] = $msg;
+			$data['id'] = $this->anoletivo_model->getInsertId();
 		endif;
 
 		$body['action'] = base_url() .'index.php/anoletivo/save';

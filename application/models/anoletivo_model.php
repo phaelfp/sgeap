@@ -60,6 +60,11 @@ class anoletivo_model extends CI_Model {
 		return ($this->db->affected_rows())?"Registro inserido com sucesso!":"Erro: ao inserir o registro.";
 	}
 
+	public function getInsertId()
+	{
+		return $this->db->insert_id();
+	}
+
 	public function update($data)
 	{
 		$where = array();

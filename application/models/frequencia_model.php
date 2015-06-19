@@ -61,6 +61,25 @@ class frequencia_model extends CI_Model {
 		return $alunos;
 	}
 
+	public function store($data)
+	{
+		$this->db->select('id');
+		$this->db->from('Frequencia');
+		$this->db->where('id_turma', $data['id_turma']);
+		$this->db->where('id_disciplina',$data['id_disciplina']);
+		$this->db->where('id_dia_semana',$data['id_dia_semana']);
+		$this->db->where('dt_aula',$data['dt_aula']);
+		$this->db->where('id_aluno',$data['id_aluno']);
+		$query = $this->db->get();
+		if ($query->num_rows() > 0):
+			$result = $query->result_array();
+			$this->id = $result[0]['id'];
+			$this->update($data);
+		else:
+			$this->insert($data);
+		endif;
+	}
+
 	public function insert($data)
 	{
 		$this->db->insert($this->table_name, $data);
