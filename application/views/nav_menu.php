@@ -31,6 +31,9 @@
         <li class="dropdown">
 			<a href="<?php echo base_url()?>index.php/frequencia">Frequ&ecirc;ncia</a>
         </li>
+        <li class="dropdown">
+			<a href="<?php echo base_url()?>index.php/login/logoff">Sair</a>
+        </li>
       </ul>
     </div>
   </div>
