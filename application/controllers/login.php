@@ -27,12 +27,12 @@ class login extends CI_Controller{
 			$vars_session = array('registro'=>$ok->login,'usuario'=>$ok->nome);
 			$this->session->set_userdata($vars_session);
 			$dados  = array("error" => '');
-			echo json_encode((object)$dados);
+			echo json_encode($dados);
 			exit();
 		}
 		else{	
 			$dados = array("error" =>'Matr&iacute;cula ou senha inv&aacute;lida');
-			echo json_encode((object)$dados);
+			echo json_encode($dados);
 			exit();
 		}		
 	}
