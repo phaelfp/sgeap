@@ -17,7 +17,7 @@
 	<?php endif; ?>
 	<div class="error"></div>
 	<div class="row">
-		<form action="<?=$action?>" method="post" <?php if(empty($form_name)): ?> name="form1" <?php else: ?> name="<?=$form_name?>" <?php endif; ?> class="form-horizontal">
+		<form method="post" name="form1" class="form-horizontal">
 			<div class="form-group">
 				<label for="username" class="col-sm-2 control-label">
 					Login
@@ -36,7 +36,7 @@
 			</div>
 			<div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
-			    	<button type="submit" id="validar" class="btn btn-default">Enviar</button>
+			    	<button type="button" id="validar" class="btn btn-default">Enviar</button>
 			    </div>
 			</div>
 		</form>
@@ -57,7 +57,8 @@ jQuery(function(){
 	  			success: function(data) {
 	  				if(data.error){
 	  					jQuery('.error').html(data.error);
-	  				} else {
+					} else {
+						alert(data.error);
 	  					location = "<?php echo base_url();?>index.php/welcome/";
 	  				}
 	  			} 					
