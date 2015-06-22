@@ -53,12 +53,7 @@ jQuery(function(){
 			}	
 
 			if(err){
-				$('.error').html('<div role="alert" class="alert alert-danger alert-dismissible fade in">
-		<button aria-label="Close" data-dismiss="alert" class="close" type="button">
-			<span aria-hidden="true">×</span>
-		</button>
-		<strong>Erro: </strong>'+ error +'
-	</div>');
+				jQuery('.error').html('<div role="alert" class="alert alert-danger alert-dismissible fade in"><button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button><strong>Erro: </strong>'+ error +'</div>');
 			} else {
 				jQuery.ajax({
 					url: "<?php echo base_url();?>index.php/login/validar",
@@ -67,12 +62,7 @@ jQuery(function(){
 					data: {username:user,password:pass},
 					success: function(data) {
 						if(data.error){
-							jQuery('.error').html('<div role="alert" class="alert alert-danger alert-dismissible fade in">
-		<button aria-label="Close" data-dismiss="alert" class="close" type="button">
-			<span aria-hidden="true">×</span>
-		</button>
-		<strong>Erro: </strong>'+ data.error +'
-	</div>');
+							jQuery('.error').html('<div role="alert" class="alert alert-danger alert-dismissible fade in"><button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button><strong>Erro: </strong>'+ data.error +'</div>');
 						} else {
 							location = "<?php echo base_url();?>index.php/welcome/";
 						}
