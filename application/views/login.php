@@ -48,28 +48,21 @@ jQuery(function(){
 			var user = $('#username').val();
 			var pass = $('#password').val();
 			var err  = '';
-			if(!user && !pass){
-				err = "Todos os campos s&atilde;o obrigat&oacute;rios"; 
-			}	
 
-			if(err){
-				jQuery('.error').html('<div role="alert" class="alert alert-danger alert-dismissible fade in"><button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button><strong>Erro: </strong>'+ error +'</div>');
-			} else {
-				jQuery.ajax({
-					url: "<?php echo base_url();?>index.php/login/validar",
-					type: "POST",
-					dataType: "json",
-					data: {username:user,password:pass},
-					success: function(data) {
-						if(data.error){
-							jQuery('.error').html('<div role="alert" class="alert alert-danger alert-dismissible fade in"><button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button><strong>Erro: </strong>'+ data.error +'</div>');
-						} else {
-							location = "<?php echo base_url();?>index.php/welcome/";
-						}
-					} 					
-				});		
+	  		jQuery.ajax({
+	  			url: "<?php echo base_url();?>index.php/login/validar",
+	  			type: "POST",
+	  			dataType: "json",
+	  			data: {username:user,password:pass},
+	  			success: function(data) {
+	  				if(data.error){
+	  					jQuery('.error').html(data.error);
+	  				} else {
+	  					location = "<?php echo base_url();?>index.php/welcome/";
+	  				}
+	  			} 					
+	  		});		
 
-			}			
 		});
 	});
 	</script>
