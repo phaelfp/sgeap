@@ -58,7 +58,6 @@ jQuery(function(){
 	  				if(data.error){
 	  					jQuery('.error').html(data.error);
 					} else {
-						alert(data.error);
 	  					location = "<?php echo base_url();?>index.php/welcome/";
 	  				}
 	  			} 					
