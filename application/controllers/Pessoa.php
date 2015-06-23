@@ -87,8 +87,10 @@ TXT;
 			'id' => $this->input->post('id'),
 			'nome' => $this->input->post('nome'),
 			'login' => $this->input->post('login'),
-			'password' => sha1($this->input->post('password')),
 		);
+		$password = $this->input->post('password');
+		if (!empty($password))
+			$data['password'] = sha1($password);
 		$body = array();
 
 		if(empty($data['id'])):
