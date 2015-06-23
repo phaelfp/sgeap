@@ -7,10 +7,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-	  <a class="navbar-brand" href="<?php echo base_url()?>">CP II</a>
+	  <a class="navbar-brand" href="<?php echo base_url()?>">SGEAP</a>
     </div>    
     <div class="collapse navbar-collapse" id="bs-navbar-collapse">
-      <ul class="nav navbar-nav">
+      <ul<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administra&ccedil;&atilde;o<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="<?php echo base_url()?>index.php/pessoa">Pessoa</a></li>
+            <li><a href="<?php echo base_url()?>index.php/perfil">Perfil</a></li>
+            <li><a href="<?php echo base_url()?>index.php/tela">Tela</a></li>
+          </ul>
+        </li> class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastro<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
