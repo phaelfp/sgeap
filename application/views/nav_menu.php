@@ -10,14 +10,15 @@
 	  <a class="navbar-brand" href="<?php echo base_url()?>">SGEAP</a>
     </div>    
     <div class="collapse navbar-collapse" id="bs-navbar-collapse">
-      <ul<li class="dropdown">
+	  <ul class="nav navbar-nav">
+		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Administra&ccedil;&atilde;o<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="<?php echo base_url()?>index.php/pessoa">Pessoa</a></li>
             <li><a href="<?php echo base_url()?>index.php/perfil">Perfil</a></li>
             <li><a href="<?php echo base_url()?>index.php/tela">Tela</a></li>
           </ul>
-        </li> class="nav navbar-nav">
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Cadastro<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
