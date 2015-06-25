@@ -131,7 +131,6 @@ class Report extends CI_Controller {
 	public function listaPresenca()
 	{
         $this->load->library('pdf');
-		$pdf = new pdf();
 
 		$this->load->model('turma_model');
 		$this->load->model('serie_model');
@@ -153,6 +152,7 @@ class Report extends CI_Controller {
 		$curso = $this->curso_model->getId($data['id_curso']);
 		$turma = $this->turma_model->getId($data['id']);
 
+		$pdf = new pdf();
 		$pdf->SetFont('Arial','',10);
 		$pdf->AddPage('P');
 		$pdf->Cell(0,5,$anoletivo->ano,0,1,'C');
@@ -169,7 +169,8 @@ class Report extends CI_Controller {
 	  	endforeach;
 
 
-        $pdf->Output('lista-presenca.pdf','F');
+        //$pdf->Output('lista-presenca.pdf','F');
+        $pdf->Output();
 		exit();
 	}
 }
