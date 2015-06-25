@@ -157,19 +157,17 @@ class Report extends CI_Controller {
 		$pdf->AddPage('P');
 		$pdf->Cell(0,5,$anoletivo->ano,0,1,'C');
 		$text = "{$serie->descricao} / {$curso->descricao}";
-		$pdf->Cell(0,5,$text,0,1,'C');
-		$pdf->Cell(0,5,$turma->descricao,0,1,'C');
+		$pdf->Cell(0,5,utf8_decode($text),0,1,'C');
+		$pdf->Cell(0,5,utf8_decode($turma->descricao),0,1,'C');
 
 		$pdf->Cell(100,5,"NOME",1,0,'C');
 		$pdf->Cell(  0,5,"ASSINATURA",1,1,'C');
 
 		foreach ($alunos as $ids => $aluno):
-	  		$pdf->Cell(100,5,$aluno->nm_aluno,1,0,'L');
+	  		$pdf->Cell(100,5,$aluno['nm_aluno'],1,0,'L');
 			$pdf->Cell(  0,5,"",1,1);
 	  	endforeach;
 
-
-        //$pdf->Output('lista-presenca.pdf','F');
         $pdf->Output();
 		exit();
 	}
