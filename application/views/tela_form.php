@@ -17,35 +17,14 @@
 	<?php endif; ?>
 	<div class="row">
 		<form action="<?=$action?>" method="post" <?php if(empty($form_name)): ?> name="form1" <?php else: ?> name="<?=$form_name?>" <?php endif; ?> class="form-horizontal">
-			<input type="hidden" name="id" value="<?php if (!empty($pessoa)): echo $pessoa->id; endif;?>">
+			<input type="hidden" name="id" value="<?php if (!empty($tela)): echo $tela->id; endif;?>">
 			<div class="form-group">
 				<label for="nome" class="col-sm-2 control-label">
-					Nome Completo
+					Tela
 				</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="nome" id="nome" value="<?php if (!empty($pessoa)): echo $pessoa->nome; endif;?>">
+					<input type="text" class="form-control" name="nome" id="nome" value="<?php if (!empty($tela)): echo $tela->nome; endif;?>">
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="login" class="col-sm-2 control-label">
-					Login
-				</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name="login" id="login" value="<?php if (!empty($pessoa)): echo $pessoa->login; endif;?>">
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="password" class="col-sm-2 control-label">
-					Senha
-				</label>
-				<div class="col-sm-10">
-					<input type="password" class="form-control" name="password" id="password">
-				</div>
-			</div>
-			<div class="checkbox">
-				<?php foreach ($perfil as $key => $value) : ?>
-				<div class="col-sm-offset-2 col-sm-10"><label><input type="checkbox" <?php in_array($value, $pessoa->perfil)?' checked="checked"':'';?>name="perfil[]" value="<?=$value->id?>"><?=$value->descricao?></label></div>
-				<?php endforeach; ?>
 			</div>
 			<hr>
 			<div class="form-group">

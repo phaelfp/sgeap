@@ -164,7 +164,7 @@ class Report extends CI_Controller {
 		$pdf->Cell(  0,5,"ASSINATURA",1,1,'C');
 
 		foreach ($alunos as $ids => $aluno):
-	  		$pdf->Cell(100,5,$aluno['nm_aluno'],1,0,'L');
+	  		$pdf->Cell(100,5,utf8_decode($aluno['nm_aluno']),1,0,'L');
 			$pdf->Cell(  0,5,"",1,1);
 	  	endforeach;
 

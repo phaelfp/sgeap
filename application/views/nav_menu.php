@@ -32,6 +32,12 @@
             <li class="divider"></li>
             <li><a href="<?php echo base_url()?>index.php/aluno">Aluno</a></li>
           </ul>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Relat&oacute;rios<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="<?php echo base_url()?>index.php/turma/listaPresenca">Lista de Presen&ccedil;a</a></li>
+          </ul>
+        </li>
         </li>
         <li class="dropdown">
 			<a href="<?php echo base_url()?>index.php/matricula">Matr&iacute;cula</a>
