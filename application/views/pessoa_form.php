@@ -44,7 +44,7 @@
 			</div>
 			<div class="checkbox">
 				<?php foreach ($perfil as $key => $value) : ?>
-				<div class="col-sm-offset-2 col-sm-10"><label><input type="checkbox" <?php (array_search($value, $pessoa->perfil)!==NULL)?' checked="checked"':'';?>name="perfil[]" value="<?=$value->id?>"><?=$value->descricao?></label></div>
+				<div class="col-sm-offset-2 col-sm-10"><label><input type="checkbox" <?php in_array($value->key, $possui)?' checked="checked"':'';?>name="perfil[]" value="<?=$value->id?>"><?=$value->descricao?></label></div>
 				<?php endforeach; ?>
 			</div>
 			<hr>

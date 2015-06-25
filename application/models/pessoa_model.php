@@ -46,6 +46,23 @@ class pessoa_model extends CI_Model {
 		return $dados;
 	}
 
+	public function getPossui($id = null)
+	{
+		if (empty($id))
+			$id = $this->id;
+		$dados = array();
+		$sql = "SELECT id_perfil FROM Possui WHERE id_pessoa = {$id}";
+		$query = $this->db->query($sql);
+		$result = $query->result();
+		if ($query->num_rows() > 0)
+		{
+			foreach ($result as $key => $field){
+				$dados[] = $field->id_perfil;
+			}			
+		}
+		return $dados;
+	}
+
 	public function getPerfil($id = null)
 	{
 		if (empty($id))
