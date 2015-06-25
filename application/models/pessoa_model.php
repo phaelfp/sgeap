@@ -115,7 +115,7 @@ class pessoa_model extends CI_Model {
 
 	public function setPerfil($perfil = array())
 	{
-		$sql = "DELETE FROM Possui Where id_usuario = {$this->id}";
+		$sql = "DELETE FROM Possui Where id_pessoa = {$this->id}";
 		$this->db->query($sql);
 		foreach($perfil as $key => $value):
 			$this->db->insert('Possui', array('id_perfil'=>$value,'id_pessoa'=>$this->id));
