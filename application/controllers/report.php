@@ -130,7 +130,7 @@ class Report extends CI_Controller {
 
 	public function listaPresenca()
 	{
-        $this->load->library('Fpdf/fpdf');
+        $this->load->library('pdf');
 		$pdf = new pdf();
 
 		$this->load->model('turma_model');
