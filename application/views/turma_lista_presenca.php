@@ -58,7 +58,7 @@
 					<select id="id_turma" name="id_turma" class="form-control">
  						<option value=""> - </option>
 					</select>
-				</div>                                                                           gg
+				</div>
 			</div>
 			<hr>
 			<div class="form-group">
