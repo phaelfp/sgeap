@@ -127,4 +127,49 @@ class Report extends CI_Controller {
 			);
 		return utf8_decode($month[$monthNum]);
 	}
+
+	public function listaPresenca()
+	{
+        $this->load->library('Fpdf');
+		$pdf = new pdf();
+
+		$this->load->model('turma_model');
+		$this->load->model('serie_model');
+		$this->load->model('curso_model');
+		$this->load->model('anoletivo_model');
+		$this->load->model('frequencia_model');
+		$id_turma = $this->input->post('id_turma');
+		$alunos = $this->frequencia_model->getAlunoJSON($id_turma);
+
+		 $data = array(
+			'id' => $this->input->post('id_turma'),
+			'id_curso' => $this->input->post('id_curso'),
+			'id_serie' => $this->input->post('id_serie'),
+			'id_anoletivo' => $this->input->post('id_anoletivo'),
+		);
+
+		$anoletivo = $this->anoletivo_model->getId($data['id_anoletivo']);
+		$serie     = $this->serie_model->getId($data['id_serie']);
+		$curso = $this->curso_model->getId($data['id_curso']);
+		$turma = $this->turma_model->getId($data['id']);
+
+		$pdf->SetFont('Arial','',10);
+		$pdf->AddPage('P');
+		$pdf->Cell(0,5,$anoletivo->ano,0,1,'C');
+		$text = "{$serie->descricao} / {$curso->descricao}";
+		$pdf->Cell(0,5,$text,0,1,'C');
+		$pdf->Cell(0,5,$turma->descricao,0,1,'C');
+
+		$pdf->Cell(100,5,"NOME",1,0,'C');
+		$pdf->Cell(  0,5,"ASSINATURA",1,1,'C');
+
+		foreach ($alunos as $ids => $aluno):
+	  		$pdf->Cell(100,5,$aluno->nm_aluno,1,0,'L');
+			$pdf->Cell(  0,5,"",1,1);
+	  	endforeach;
+
+
+        $pdf->Output('lista-presenca.pdf','F');
+		exit();
+	}
 }

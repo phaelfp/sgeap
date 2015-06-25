@@ -90,6 +90,20 @@ class Turma extends CI_Controller {
 		$this->load->view('footer');   
 	}
 
+	public function listaPresenca()
+	{
+		$head = array();
+		$head['title'] = 'Turma';
+		$this->load->view('header', $head);
+		$this->load->view('nav_menu');
+		$this->load->model('anoletivo_model');
+		$body = array();
+		$body['action'] = base_url() .'index.php/report/listaPresenca';
+		$body['anoletivo'] = $this->anoletivo_model->getCombo();
+		$this->load->view('turma_lista_presenca', $body);
+		$this->load->view('footer');   
+	}
+
 	public function save()
 	{
 		$this->load->model('turma_model');
