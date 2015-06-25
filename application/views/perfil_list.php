@@ -28,7 +28,7 @@
 					</div>
 				</td>
 				<td>
-					<?php echo $item->nome ;?>
+					<?php echo $item->descricao ;?>
 				</td>
 		   	</tr>
 		   	<?php endforeach; ?>

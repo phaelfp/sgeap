@@ -34,7 +34,7 @@ class pessoa_model extends CI_Model {
 			$id = $this->id;
 		$dados = array();
 		$sql = "SELECT t.nome FROM Tela as t inner join Acessa as a on t.id = a.id_tela";
-		$sql .= " inner join Possui as p on a.id_perfil = p.id_perfil where p.id_usuario = {$id}";
+		$sql .= " inner join Possui as p on a.id_perfil = p.id_perfil where p.id_pessoa = {$id}";
 		$query = $this->db->query($sql);
 		$result = $query->result();
 		if ($query->num_rows() > 0)
@@ -51,7 +51,7 @@ class pessoa_model extends CI_Model {
 		if (empty($id))
 			$id = $this->id;
 		$dados = array();
-		$sql = "SELECT pf.* Perfil as pf inner join Possui as ps on pf.id = ps.id_perfil where ps.id_usuario = {$id}";
+		$sql = "SELECT pf.* Perfil as pf inner join Possui as ps on pf.id = ps.id_perfil where ps.id_pessoa = {$id}";
 		$query = $this->db->query($sql);
 		$result = $query->result();
 		if ($query->num_rows() > 0)
@@ -101,7 +101,7 @@ class pessoa_model extends CI_Model {
 		$sql = "DELETE FROM Possui Where id_usuario = {$this->id}";
 		$this->db->query($sql);
 		foreach($perfil as $key => $value):
-			$this->db->insert('Possui', array('id_perfil'=>$value,'id_usuario'=>$this->id));
+			$this->db->insert('Possui', array('id_perfil'=>$value,'id_pessoa'=>$this->id));
 		endforeach;
 	}
 
