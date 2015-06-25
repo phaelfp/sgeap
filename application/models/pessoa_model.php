@@ -51,7 +51,7 @@ class pessoa_model extends CI_Model {
 		if (empty($id))
 			$id = $this->id;
 		$dados = array();
-		$sql = "SELECT pf.* Perfil as pf inner join Possui as ps on pf.id = ps.id_perfil where ps.id_pessoa = {$id}";
+		$sql = "SELECT pf.* FROM Perfil as pf inner join Possui as ps on pf.id = ps.id_perfil where ps.id_pessoa = {$id}";
 		$query = $this->db->query($sql);
 		$result = $query->result();
 		if ($query->num_rows() > 0)
