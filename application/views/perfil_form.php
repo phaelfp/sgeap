@@ -40,3 +40,10 @@
 		</form>
 	</div>
 </div>
+<!--
+<?php 
+	print_r($tela);
+	echo "\n\n\n";
+	print_r($acessa);
+?>
+-->
