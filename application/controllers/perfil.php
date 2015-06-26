@@ -34,6 +34,7 @@ class Perfil extends CI_Controller {
 		$this->load->view('nav_menu');
 		
 		$this->load->model('perfil_model');
+		$this->load->model('tela_model');
 		if (empty($id)):
 			$id=0 ;
 		endif;
@@ -41,6 +42,8 @@ class Perfil extends CI_Controller {
 		$body = array();
 		$body['action'] = base_url() .'index.php/perfil/save';
 		$body['perfil'] = $item;
+		$body['acessa'] = $item->getAcessa();
+		$body['tela'] = $this->tela_model->getAll();
 		$this->load->view('perfil_form', $body);
 		$this->load->view('footer');   
 	}
@@ -87,12 +90,13 @@ TXT;
 			'id' => $this->input->post('id'),
 			'descricao' => $this->input->post('descricao'),
 		);
+		$tela = $this->input->post('tela');
 		$body = array();
 
 		if(empty($data['id'])):
-			$msg = $this->perfil_model->insert($data);
+			$msg = $this->perfil_model->insert($data, $tela);
 		else:
-			$msg = $this->perfil_model->update($data);
+			$msg = $this->perfil_model->update($data, $tela);
 		endif;
 
 		if (substr($msg,0,4) === 'Erro'):
@@ -100,7 +104,7 @@ TXT;
 		else:
 			$body['success'] = $msg;
 		endif;
-
+		
 		$body['action'] = base_url() .'index.php/perfil/save';
 		$body['perfil'] = $this->perfil_model;
 		$this->load->view('perfil_form', $body);

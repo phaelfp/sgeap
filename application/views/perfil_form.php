@@ -26,6 +26,11 @@
 					<input type="text" class="form-control" name="descricao" id="descricao" value="<?php if (!empty($perfil)): echo $perfil->descricao; endif;?>">
 				</div>
 			</div>
+			<div class="checkbox">
+				<?php foreach ($tela as $key => $value) : ?>
+				<div class="col-sm-offset-2 col-sm-10"><label><input type="checkbox" <?php if(in_array($value->id, $acessa)): ?>checked="checked" <?php endif; ?>name="tela[]" value="<?=$value->id?>"><?=$value->nome?></label></div>
+				<?php endforeach; ?>
+			</div>
 			<hr>
 			<div class="form-group">
 			    <div class="col-sm-offset-2 col-sm-10">
