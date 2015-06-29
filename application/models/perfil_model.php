@@ -38,6 +38,8 @@ class perfil_model extends CI_Model {
 			foreach ($result as $key => $field){
 				$dados = $field;
 			}
+			$this->getAcessa();
+			$this->getTela();
 			return $dados;
 		}
 		return NULL;
@@ -91,6 +93,7 @@ class perfil_model extends CI_Model {
 				$dados[] = $field->id_tela;
 			}			
 		}
+		$this->acessa = $dados;
 		return $dados;
 	}
 
@@ -108,6 +111,7 @@ class perfil_model extends CI_Model {
 				$dados[] = $field;
 			}			
 		}
+		$this->tela = $dados;
 		return $dados;
 	}
 

@@ -4,8 +4,6 @@ class tela_model extends CI_Model {
 
 	public $id;
 	public $nome;
-	public $login;
-	public $password;
 
 	public function __construct()
     {
