@@ -24,6 +24,7 @@ class Frequencia extends CI_Controller {
 		$body = array();
 		$body['anoletivo'] = $this->anoletivo_model->getAll();
 		$body['action'] = base_url() .'index.php/frequencia/save';
+		$body['dt_aula'] = date ("Y-m-d H:i:s");
 		if (!empty($msg)):
 			if (substr($msg,0,4) === 'Erro'):
 				$body['error'] = $msg;

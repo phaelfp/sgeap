@@ -17,6 +17,7 @@
 	<?php endif; ?>
 	<div class="row">
 		<form action="<?=$action?>" method="post" <?php if(empty($form_name)): ?> name="form1" <?php else: ?> name="<?=$form_name?>" <?php endif; ?> class="form-horizontal">
+		<input type="hidden" name="dt_aula" value="<?=$dt_aula?>" />
 			<div class="form-group">
 				<label for="id_anoletivo" class="col-sm-2 control-label">
 					Ano Letivo
