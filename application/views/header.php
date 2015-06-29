@@ -8,5 +8,6 @@
   <link rel="stylesheet" type="text/css" href="<?=base_url();?>media/css/style.css" />
   <script src="<?=base_url();?>media/js/jquery-1.11.2.min.js"></script>
   <script src="<?=base_url();?>media/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 <body role="document">

@@ -36,8 +36,6 @@ class perfil_model extends CI_Model {
 			foreach ($result as $key => $field){
 				$dados = $field;
 			}
-			$dados->getAcessa();
-			$dados->getTela();
 			return $dados;
 		}
 		return NULL;
