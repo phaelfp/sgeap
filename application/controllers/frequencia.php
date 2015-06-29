@@ -42,8 +42,8 @@ class Frequencia extends CI_Controller {
 
 		$id_turma = $this->input->post('id_turma');
 		$id_disciplina = $this->input->post('id_disciplina');
+		$dt_aula = $this->input->post('dt_aula');
 		$id_dia_semana = date('w') + 1;
-		$dt_aula = date ("Y-m-d H:i:s");
 		$alunos = $this->frequencia_model->getAlunoJSON($id_turma);
 		$id_aluno = $this->input->post('id_aluno');
 
@@ -52,7 +52,7 @@ class Frequencia extends CI_Controller {
 				'id_turma' => $id_turma,
 				'id_disciplina' => $id_disciplina,
 				'id_dia_semana' => $id_dia_semana,
-				'dt_aula' => "'{$dt_aula}'",
+				'dt_aula' => $dt_aula,
 				'id_aluno' => $aluno['id'],
 				'is_presente' => in_array($aluno['id'], $id_aluno)?'1':'0',
 			);

@@ -38,7 +38,6 @@
             <li><a href="<?php echo base_url()?>index.php/turma/listaPresenca">Lista de Presen&ccedil;a</a></li>
           </ul>
         </li>
-        </li>
         <li class="dropdown">
 			<a href="<?php echo base_url()?>index.php/matricula">Matr&iacute;cula</a>
         </li>
