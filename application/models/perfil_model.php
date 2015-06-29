@@ -60,7 +60,7 @@ class perfil_model extends CI_Model {
 	public function update($data, $tela = array())
 	{
 		$where = array();
-		$where["id" ] = array_shift($data);
+		$this->id = $where["id" ] = array_shift($data);
         $this->db->update($this->table_name, $data, $where);
 		$this->setTela($tela);
 		return ($this->db->affected_rows())?"Registro atualizado com sucesso!":"Erro: ao atualizar o registro.";
@@ -68,9 +68,9 @@ class perfil_model extends CI_Model {
 
 	public function delete($id)
 	{
+		$this->id = $where["id" ] = $id;
 		$sql = "DELETE FROM Acessa WHERE id_perfil = {$this->id}";
 		$this->db->query($sql);
-		$where["id" ] = $id;
         $this->db->delete($this->table_name, $where);
 		return ($this->db->affected_rows())?"Registro excluido com sucesso!":"Erro: ao excluir o registro.";
 	}
@@ -89,7 +89,6 @@ class perfil_model extends CI_Model {
 				$dados[] = $field->id_tela;
 			}			
 		}
-		$this->acessa = $dados;
 		return $dados;
 	}
 
@@ -107,7 +106,6 @@ class perfil_model extends CI_Model {
 				$dados[] = $field;
 			}			
 		}
-		$this->tela = $dados;
 		return $dados;
 	}
 
