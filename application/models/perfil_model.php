@@ -3,9 +3,7 @@
 class perfil_model extends CI_Model {
 
 	public $id;
-	public $nome;
-	public $login;
-	public $password;
+	public $descricao;
 
 	public function __construct()
     {
@@ -38,8 +36,8 @@ class perfil_model extends CI_Model {
 			foreach ($result as $key => $field){
 				$dados = $field;
 			}
-			$this->getAcessa();
-			$this->getTela();
+			$dados->getAcessa();
+			$dados->getTela();
 			return $dados;
 		}
 		return NULL;
