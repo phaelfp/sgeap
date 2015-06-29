@@ -40,12 +40,3 @@
 		</form>
 	</div>
 </div>
-<!--
-<?php 
-	print_r($perfil);
-	echo "\n\n\n";
-	print_r($tela);
-	echo "\n\n\n";
-	print_r($acessa);
-?>
--->
