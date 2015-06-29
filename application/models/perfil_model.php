@@ -81,7 +81,7 @@ class perfil_model extends CI_Model {
 			$id = $this->id;
 		$sql = "SELECT id_tela FROM Acessa WHERE id_perfil = {$id}";
 		$dados = array();
-		$result = $this->db->query($sql);
+		$query = $this->db->query($sql);
 		$result = $query->result();
 		if ($query->num_rows() > 0)
 		{
