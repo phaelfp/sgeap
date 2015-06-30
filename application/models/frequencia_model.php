@@ -29,8 +29,66 @@ class frequencia_model extends CI_Model {
 			}			
 		}
 		return $dados;
-    }
-	
+	}
+
+	public function getDisciplina($id_turma)
+	{
+		$sql = "SELECT d.id, d.impressao as disciplina FROM Disciplina as d INNER JOIN Frequencia as f on d.id = f.id_disciplina where f.id_turma = {$id_turma}";
+		$query = $this->db->query($sql);
+		$result = $query->result_array();
+		$data = array();
+		foreach ($result as $key => $value):
+			$value['yearmonth'] = $this->getMesesAno($id_turma,$value['id']);
+			$value['students'] = $this->getAlunosJSON($id_turma);
+			$data[] = $value;
+		endforeach;
+		return $data;
+	}
+
+	public function getDiaFrequencia($id_turma, $id_disciplina, $mesano)
+	{
+		$sql = <<<EOF
+SELECT DISTINCT DATE_FORMAT(f.dt_aula, '%d') as dia
+, dh.n_tempos
+FROM Frequencia as f
+INNER JOIN DiaHorario as dh
+   ON f.id_turma = dh.id_turma
+  AND f.id_disciplina = dh.id_disciplina
+  AND f.id_dia_semana = dh.id_dia_semana
+WHERE f.id_turma = {$id_turma}
+  AND f.id_disciplina = {$id_disciplina}
+  AND DATE_FORMAT(f.dt_aula, '%Y%m') = '{$mesano}'
+EOF;
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
+
+	public function getDiaFrequenciaAluno($id_turma, $id_disciplina, $mesano, $id_aluno)
+	{
+		$sql = <<<EOF
+SELECT f.is_presente
+, dh.n_tempos
+FROM Frequencia as f
+INNER JOIN DiaHorario as dh
+   ON f.id_turma = dh.id_turma
+  AND f.id_disciplina = dh.id_disciplina
+  AND f.id_dia_semana = dh.id_dia_semana
+WHERE f.id_turma = {$id_turma}
+  AND f.id_disciplina = {$id_disciplina}
+  AND f.id_aluno = {$id_aluno}
+  AND DATE_FORMAT(f.dt_aula, '%Y%m') = '{$mesano}'
+EOF;
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+	public function getMesesAno($id_turma,$id_disciplina)
+	{
+		$sql = "select distinct date_format(f.dt_aula, '%Y%m') as as dt_ym from Frequencia as f where f.id_turma = {$id_turma} and f.id_disciplina = {$id_disciplina}";
+		$query = $this->db->query($sql);
+		return $query->result_array();
+	}
+
     public function getId($id)
     {
 		$sql = "SELECT * FROM {$this->table_name} where id = {$id}";
@@ -48,17 +106,12 @@ class frequencia_model extends CI_Model {
 
 	public function getAlunoJSON($id_turma)
 	{
-		$alunos = array();
 		$this->db->select('Aluno.*');
 		$this->db->from('Matricula');
 		$this->db->join('Aluno','Aluno.id = Matricula.id_aluno');
 		$this->db->where('Matricula.id_turma',$id_turma);
 		$query = $this->db->get();
-		$result = $query->result_array();
-		foreach($result as $key => $row):
-			$alunos[] = $row;
-		endforeach;
-		return $alunos;
+		return $result = $query->result_array();
 	}
 
 	public function store($data)
