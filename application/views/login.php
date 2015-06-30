@@ -15,7 +15,6 @@
 		<strong>Sucesso: </strong><?php echo $success;?>
 	</div>
 	<?php endif; ?>
-	<div class="error"></div>
 	<div class="row">
 		<form method="post" name="form1" class="form-horizontal">
 			<div class="form-group">
@@ -56,7 +55,7 @@ jQuery(function(){
 	  			data: {username:user,password:pass},
 	  			success: function(data) {
 	  				if(data.error){
-	  					jQuery('.error').html(data.error);
+	  					jQuery('.container').prepend('<div role="alert" class="alert alert-danger alert-dismissible fade in"><button aria-label="Close" data-dismiss="alert" class="close" type="button"><span aria-hidden="true">×</span></button><strong>Erro: </strong>' + data.error + '</div>');
 					} else {
 	  					location = "<?php echo base_url();?>index.php/welcome/";
 	  				}

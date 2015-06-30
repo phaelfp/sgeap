@@ -16,6 +16,7 @@ class login extends CI_Controller{
 		
 	}
 	function validar(){
+		header("Access-Control-Allow-Origin: *");
 		$this->load->model('login_model');
 			
 		$login 	= $this->input->post('username',true);
