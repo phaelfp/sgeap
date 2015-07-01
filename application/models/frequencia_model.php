@@ -39,7 +39,7 @@ class frequencia_model extends CI_Model {
 		$data = array();
 		foreach ($result as $key => $value):
 			$value['yearmonth'] = $this->getMesesAno($id_turma,$value['id']);
-			$value['students'] = $this->getAlunosJSON($id_turma);
+			$value['students'] = $this->getAlunoJSON($id_turma);
 			$data[] = $value;
 		endforeach;
 		return $data;
@@ -84,7 +84,7 @@ EOF;
 	}
 	public function getMesesAno($id_turma,$id_disciplina)
 	{
-		$sql = "select distinct date_format(f.dt_aula, '%Y%m') as as dt_ym from Frequencia as f where f.id_turma = {$id_turma} and f.id_disciplina = {$id_disciplina}";
+		$sql = "select distinct date_format(f.dt_aula, '%Y%m') as dt_ym from Frequencia as f where f.id_turma = {$id_turma} and f.id_disciplina = {$id_disciplina}";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

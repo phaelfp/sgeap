@@ -177,7 +177,7 @@ class Report extends CI_Controller {
 		$this->load->model('frequencia_model');
         $this->load->library('pdf');
 		$id_turma = $this->input->post('id_turma');
-        $disciplinas = $this->frequencia_model->getDisciplinas($id_turma);
+        $disciplinas = $this->frequencia_model->getDisciplina($id_turma);
 		$pdf = new pdf();
 		foreach( $disciplinas as $disciplina):
 			if (count($disciplina['yearmonth'])):
@@ -193,7 +193,7 @@ class Report extends CI_Controller {
 					$pdf->RoundedRect(87, 21.5, 35, 8, 1);
 					$pdf->Text( 66, 27, utf8_decode("DISCIPLINA"));
 
-					$pdf->Text( 89, 27, $disciplina['disciplina']);
+					$pdf->Text( 89, 27, utf8_decode($disciplina['disciplina']));
 					$pdf->Text( 24, 27, $this->getMes(substr($yearmonth['dt_ym'],4,2)));
 					$pdf->SetXY(10,31);
 
