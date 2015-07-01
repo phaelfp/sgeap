@@ -33,7 +33,7 @@ class frequencia_model extends CI_Model {
 
 	public function getDisciplina($id_turma)
 	{
-		$sql = "SELECT d.id, d.impressao as disciplina FROM Disciplina as d INNER JOIN Frequencia as f on d.id = f.id_disciplina where f.id_turma = {$id_turma}";
+		$sql = "SELECT DISTINCT d.id, d.impressao as disciplina FROM Disciplina as d INNER JOIN Frequencia as f ON d.id = f.id_disciplina WHERE f.id_turma = {$id_turma}";
 		$query = $this->db->query($sql);
 		$result = $query->result_array();
 		$data = array();
