@@ -25,6 +25,7 @@
             <li><a href="<?php echo base_url()?>index.php/anoletivo">Ano Letivo</a></li>
             <li><a href="<?php echo base_url()?>index.php/serie">S&eacute;rie</a></li>
             <li><a href="<?php echo base_url()?>index.php/curso">Curso</a></li>
+            <li><a href="<?php echo base_url()?>index.php/certificacao">Certifica&ccedil;&atilde;o</a></li>
             <li class="divider"></li>
             <li><a href="<?php echo base_url()?>index.php/disciplina">Disciplina</a></li>
             <li><a href="<?php echo base_url()?>index.php/turma">Turma</a></li>
