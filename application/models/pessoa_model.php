@@ -101,7 +101,7 @@ class pessoa_model extends CI_Model {
 	{
 		array_shift($data);
 		$this->db->insert($this->table_name, $data);
-		$this->id = $this->db->insert_id;
+		$this->id = $this->db->insert_id();
 		$this->setPerfil($perfil);
 		return ($this->db->affected_rows())?"Registro inserido com sucesso!":"Erro: ao inserir o registro.";
 	}

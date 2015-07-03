@@ -52,7 +52,7 @@ class Perfil extends CI_Controller {
 		$body = array();
 		$body['action'] = base_url() .'index.php/perfil/save';
 		$body['perfil'] = $item;
-		$body['acessa'] = $item->getAcessa();
+		$body['acessa'] = empty($item)?array():$item->getAcessa();
 		$body['tela'] = $this->tela_model->getAll();
 		$this->load->view('perfil_form', $body);
 		$this->load->view('footer');   
@@ -115,6 +115,7 @@ TXT;
 
 		if(empty($data['id'])):
 			$msg = $this->perfil_model->insert($data, $tela);
+			$data['id'] = $this->perfil_model->id;
 		else:
 			$msg = $this->perfil_model->update($data, $tela);
 		endif;
@@ -126,7 +127,7 @@ TXT;
 		endif;
 		
 		$body['action'] = base_url() .'index.php/perfil/save';
-		$body['perfil'] = $this->perfil_model;
+		$body['perfil'] = (object)$data;
 		$this->load->view('perfil_form', $body);
 		$this->load->view('footer');   
 	}

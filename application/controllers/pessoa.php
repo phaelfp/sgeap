@@ -52,7 +52,10 @@ class Pessoa extends CI_Controller {
 		$body = array();
 		$body['action'] = base_url() .'index.php/pessoa/save';
 		$body['pessoa'] = $item;
-		$body['possui'] = $item->getPossui();
+		$possui = array();
+		if (!empty($item))
+			$possui = $item->getPossui();
+		$body['possui'] = $possui;
 		$body['perfil'] = $this->perfil_model->getAll();
 		$this->load->view('pessoa_form', $body);
 		$this->load->view('footer');   
