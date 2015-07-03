@@ -14,6 +14,11 @@ class Frequencia extends CI_Controller {
 
 	public function index($msg = null)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Frequência';
 		$this->load->view('header', $head);
@@ -38,6 +43,11 @@ class Frequencia extends CI_Controller {
 
 	public function save()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('frequencia_model');
 
 		$id_turma = $this->input->post('id_turma');
@@ -64,6 +74,11 @@ class Frequencia extends CI_Controller {
 
 	public function getAluno()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('frequencia_model');
 		$id_turma = $this->input->post('id_turma');
 		$alunos = $this->frequencia_model->getAlunoJSON($id_turma);

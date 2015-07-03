@@ -13,6 +13,11 @@ class Perfil extends CI_Controller {
 	
 	public function index()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Perfil';
 		$this->load->view('header', $head);
@@ -28,6 +33,11 @@ class Perfil extends CI_Controller {
 
 	public function edit($id = null)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Perfil';
 		$this->load->view('header', $head);
@@ -50,6 +60,11 @@ class Perfil extends CI_Controller {
 
 	public function delete()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('perfil_model');
 		$id = $this->input->post('id');
 		$msg = $this->perfil_model->delete($id);
@@ -79,6 +94,11 @@ TXT;
 
 	public function save()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('perfil_model');
 
 		$head = array();

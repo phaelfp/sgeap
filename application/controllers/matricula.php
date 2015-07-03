@@ -14,6 +14,11 @@ class Matricula extends CI_Controller {
 
 	public function index($msg = null)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Matrícula';
 		$this->load->view('header', $head);
@@ -37,6 +42,11 @@ class Matricula extends CI_Controller {
 
 	public function save()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('aluno_model');
 		$this->load->model('matricula_model');
 

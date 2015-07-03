@@ -92,6 +92,26 @@ class perfil_model extends CI_Model {
 		return $dados;
 	}
 
+	public function verifica_acesso($usuario, $nome_tela)
+	{
+		$tela = trim(strtolower(str_replace('::','/',$nome_tela)));
+		$sql = <<<EOF
+SELECT count(1) as acessa 
+FROM Tela as t
+INNER JOIN Acessa as a
+   ON t.id = a.id_tela
+INNER JOIN Possui as p
+   ON a.id_perfil = p.id_perfil
+INNER JOIN Pessoa as u
+   ON p.id_pessoa = u.id
+WHERE u.login = '{$usuario}'
+  AND t.nome = '{$tela}'
+EOF;
+		$query = $this->db->query($sql);
+		$result = $query->result();
+		return (bool)($result[0]->acessa>0);
+	}
+
 	public function getTela($id = null)
 	{
 		if (empty($id))

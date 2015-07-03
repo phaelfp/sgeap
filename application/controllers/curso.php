@@ -14,6 +14,11 @@ class Curso extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Curso';
 		$this->load->view('header', $head);
@@ -28,6 +33,11 @@ class Curso extends CI_Controller {
 
 	public function edit($id = null)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Curso';
 		$this->load->view('header', $head);
@@ -47,6 +57,11 @@ class Curso extends CI_Controller {
 
 	public function save()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('curso_model');
 
 		$head = array();
@@ -81,6 +96,11 @@ class Curso extends CI_Controller {
 
 	public function getCurso()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('turma_model');
 		$id_anoletivo = $this->input->post('id_anoletivo');
 		$array = $this->turma_model->getCursoJSON($id_anoletivo);

@@ -4,6 +4,11 @@ class Report extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('report_model');
         $this->load->library('Fpdf');
 		$courses = $this->report_model->getCourses();
@@ -130,6 +135,11 @@ class Report extends CI_Controller {
 
 	public function listaPresenca()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
         $this->load->library('pdf');
 
 		$this->load->model('turma_model');
@@ -174,6 +184,11 @@ class Report extends CI_Controller {
 
 	public function listaFrequencia()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('frequencia_model');
         $this->load->library('pdf');
 		$id_turma = $this->input->post('id_turma');

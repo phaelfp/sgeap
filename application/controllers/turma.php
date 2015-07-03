@@ -14,6 +14,11 @@ class Turma extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
@@ -29,6 +34,11 @@ class Turma extends CI_Controller {
 
 	public function add($id)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
@@ -49,6 +59,11 @@ class Turma extends CI_Controller {
 	
 	public function update()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('turma_model');
 		$this->load->model('oferecimento_model');
 
@@ -67,6 +82,11 @@ class Turma extends CI_Controller {
 
 	public function edit($id = null)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
@@ -92,6 +112,11 @@ class Turma extends CI_Controller {
 
 	public function listaPresenca()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
@@ -107,6 +132,11 @@ class Turma extends CI_Controller {
 
 	public function listaFrequencia()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
@@ -122,6 +152,11 @@ class Turma extends CI_Controller {
 
 	public function save()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('turma_model');
 		$this->load->model('serie_model');
 		$this->load->model('curso_model');
@@ -165,6 +200,11 @@ class Turma extends CI_Controller {
 
 	public function getTurma()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
    		$this->load->model('turma_model');
 		$id_anoletivo = $this->input->post('id_anoletivo');
 		$id_curso = $this->input->post('id_curso');

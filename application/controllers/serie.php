@@ -14,6 +14,11 @@ class Serie extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Serie';
 		$this->load->view('header', $head);
@@ -28,6 +33,11 @@ class Serie extends CI_Controller {
 
 	public function edit($id = null)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Serie';
 		$this->load->view('header', $head);
@@ -48,6 +58,11 @@ class Serie extends CI_Controller {
 
 	public function save()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('serie_model');
 
 		$head = array();
@@ -83,6 +98,11 @@ class Serie extends CI_Controller {
 
 	public function getSerie()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('turma_model');
 		$id_anoletivo = $this->input->post('id_anoletivo');
 		$id_curso = $this->input->post('id_curso');

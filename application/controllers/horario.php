@@ -2,7 +2,8 @@
 
 class Horario extends CI_Controller {
 
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 		$this->registro 	= $this->session->userdata('registro');
 		$this->usuario 	 	= strtoupper($this->session->userdata('usuario'));		
@@ -14,6 +15,11 @@ class Horario extends CI_Controller {
 
 	public function index($msg = null)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$head = array();
 		$head['title'] = 'Horário';
 		$this->load->view('header', $head);
@@ -37,6 +43,11 @@ class Horario extends CI_Controller {
 
 	public function save()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		//$this->load->model('diahorario_model');
 
 		$body = array();
@@ -46,6 +57,11 @@ class Horario extends CI_Controller {
 
 	public function salvarHorario()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('horario_model');
 		$data = array(
 			'id_turma' => $this->input->post('id_turma'),
@@ -62,6 +78,11 @@ class Horario extends CI_Controller {
 
 	public function deletarHorario($id)
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
 		$this->load->model('horario_model');
 		$horario = $this->horario_model->getId($id);
 		$resposta = $horario->delete();
@@ -71,6 +92,11 @@ class Horario extends CI_Controller {
 
 	public function getHorario()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
    		$this->load->model('horario_model');
 		$id_turma = $this->input->post('id_turma');
 		$id_disciplina = $this->input->post('id_disciplina');
@@ -81,6 +107,11 @@ class Horario extends CI_Controller {
 
 	public function getDisciplina()
 	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
    		$this->load->model('oferecimento_model');
 		$id_turma = $this->input->post('id_turma');
 		$array = $this->oferecimento_model->getDisciplinaJSON($id_turma);
