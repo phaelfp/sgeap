@@ -5,7 +5,8 @@ class Certificacao extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->registro 	= $this->session->userdata('registro');
-		$this->usuario 	 	= strtoupper($this->session->userdata('usuario'));		
+		$this->usuario 	 	= strtoupper($this->session->userdata('usuario'));
+		$this->menu 	 	= $this->session->userdata('menu');
 		if(empty($this->registro) || empty($this->usuario)){
 			header('location:../login/logoff');exit;
 		}
@@ -22,7 +23,7 @@ class Certificacao extends CI_Controller {
 		$head = array();
 		$head['title'] = 'Certificação';
 		$this->load->view('header', $head);
-		$this->load->view('nav_menu');
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
 		
 		$this->load->model('certificacao_model');
 		$body = array();
@@ -41,7 +42,7 @@ class Certificacao extends CI_Controller {
 		$head = array();
 		$head['title'] = 'Certificação';
 		$this->load->view('header', $head);
-		$this->load->view('nav_menu');
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
 		
 		$this->load->model('certificacao_model');
 		if (empty($id)):
@@ -68,7 +69,7 @@ class Certificacao extends CI_Controller {
 		$head = array();
 		$head['title'] = 'Certificação';
 		$this->load->view('header', $head);
-		$this->load->view('nav_menu');
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
 
 		$data = array(
 			'id' => $this->input->post('id'),

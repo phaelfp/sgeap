@@ -5,7 +5,8 @@ class Tela extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->registro 	= $this->session->userdata('registro');
-		$this->usuario 	 	= strtoupper($this->session->userdata('usuario'));		
+		$this->usuario 	 	= strtoupper($this->session->userdata('usuario'));
+		$this->menu 	 	= $this->session->userdata('menu'));
 		if(empty($this->registro) || empty($this->usuario)){
 			header('location:../login/logoff');exit;
 		}
@@ -21,7 +22,7 @@ class Tela extends CI_Controller {
 		$head = array();
 		$head['title'] = 'Tela';
 		$this->load->view('header', $head);
-		$this->load->view('nav_menu');
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
 		
 		$this->load->model('tela_model');
 		
@@ -41,7 +42,7 @@ class Tela extends CI_Controller {
 		$head = array();
 		$head['title'] = 'Tela';
 		$this->load->view('header', $head);
-		$this->load->view('nav_menu');
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
 		
 		$this->load->model('tela_model');
 		if (empty($id)):
@@ -101,7 +102,7 @@ TXT;
 		$head = array();
 		$head['title'] = 'Tela';
 		$this->load->view('header', $head);
-		$this->load->view('nav_menu');
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
 
 		$data = array(
 			'id' => $this->input->post('id'),
