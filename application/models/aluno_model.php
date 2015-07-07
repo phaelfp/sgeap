@@ -32,6 +32,20 @@ class aluno_model extends CI_Model {
 		return $dados;
     }
 	
+    public function get_ativos()
+    {
+		$sql = "SELECT id,nm_aluno FROM {$this->table_name} WHERE is_ativo = 0 AND id NOT IN (SELECT id_aluno FROM Matricula)";
+		$query = $this->db->query($sql);
+		return json_encode($query->result());
+    }
+	
+    public function get_matriculados($id_turma)
+    {
+		$sql = "SELECT * FROM {$this->table_name} WHERE id IN (SELECT id_aluno FROM Matricula WHERE id_turma = {$id_turma})";
+		$query = $this->db->query($sql);
+		return $query->result();
+    }
+	
 	public function getCombo()
     {
 		$dados = array();

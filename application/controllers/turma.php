@@ -58,7 +58,49 @@ class Turma extends CI_Controller {
 		$this->load->view('turma_form_add', $body);
 		$this->load->view('footer');   
 	}
+
+	public function addAluno($id)
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
+		$head = array();
+		$head['title'] = 'Turma';
+		$this->load->view('header', $head);
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
+		
+		$this->load->model('turma_model');
+		$this->load->model('aluno_model');
+	    $item = $this->turma_model->getId($id);
+		$body = array();
+		$body['action'] = base_url() .'index.php/turma/updateAluno';
+		$body['turma'] = $item;
+		$body['alunos'] = $this->aluno_model->get_matriculados($id);
+		$body['disponiveis'] = $this->aluno_model->get_ativos();
+		$this->load->view('turma_form_add_aluno', $body);
+		$this->load->view('footer');   
+	}
 	
+	public function updateAluno()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
+		$this->load->model('matricula_model');
+
+		$data = array();
+		$data['id_turma'] = $this->input->post('id_turma');
+		$data['id_aluno'] = $this->input->post('id_aluno');
+
+		$this->matricula_model->insert($data);
+
+		$this->addAluno($data['id_turma']);
+	}
+
 	public function update()
 	{
 		$this->load->model('perfil_model');
