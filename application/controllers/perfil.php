@@ -6,7 +6,7 @@ class Perfil extends CI_Controller {
 		parent::__construct();
 		$this->registro 	= $this->session->userdata('registro');
 		$this->usuario 	 	= strtoupper($this->session->userdata('usuario'));
-		$this->menu 	 	= $this->session->userdata('menu'));
+		$this->menu 	 	= str_replace('|','"',$this->session->userdata('menu'));
 		if(empty($this->registro) || empty($this->usuario)){
 			header('location:../login/logoff');exit;
 		}

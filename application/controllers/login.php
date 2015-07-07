@@ -166,7 +166,7 @@ EOF;
   </div>
 </nav>
 EOF;
-		return $menu;
+		return str_replace('"','|',$menu);
 	}
 	function error(){
 		$msg_erro = "Usu&aacute;rio ou Senha inv&aacute;lido";	
