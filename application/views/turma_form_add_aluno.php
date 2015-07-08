@@ -31,8 +31,9 @@
 					Aluno
 				</label>
 				<div class="col-sm-10">
-			    	<input type="text" name="nm_aluno" id="nm_aluno" class="autocomplete">
-			    	<input type="hidden" name="id_aluno" id="id_aluno" value="">
+			    	<input type="text" name="nm_aluno" id="nm_aluno" class="form-control autocomplete" placeholder="Localizar">
+					<input type="hidden" name="id_aluno" id="id_aluno" value="" class="valuecomplete">
+					<div id="resultcomplete" class="form-control"></div>
 				</div>
 			</div>
 			<hr>
@@ -58,17 +59,41 @@
 		<?php endforeach; ?>
 	</div>
 </div>
-<script src="<?=base_url();?>media/js/typeahead.bundle.js"></script>
 <script>
-	jQuery('document').ready(function(){
-		var data = <?php echo $disponiveis; ?>;
-		jQuery(".autocomplete").autocomplete({
-	        source: data,
-        	select: function (event, ui) {
-            	event.preventDefault();
-	            $("#id_aluno").val(ui.item.id);
-    	        $("#nm_aluno").val(ui.item.nm_aluno);
-        	}
-	    });
+var MIN_LENGTH = 2;
+jQuery( document ).ready(function() {
+	jQuery(".autocomplete").attr('autocomplete','off');
+	jQuery(".autocomplete").keyup(function() {
+		var keyword = jQuery(".autocomplete").val();
+		if (keyword.length >= MIN_LENGTH) {
+
+			$.get( "<?php echo base_url()?>index.php/turma/getAluno/" + keyword)
+			.done(function( data ) {
+				jQuery('#resultcomplete').html('');
+				var results = jQuery.parseJSON(data);
+				jQuery(results).each(function(key, value) {
+					jQuery('#resultcomplete').append('<div class="item" rel="'+ value.id +'">' + value.nm_aluno + '</div>');
+				})
+
+			    jQuery('.item').click(function() {
+					var text = jQuery(this).html();
+					var key  = jQuery(this).attr('rel');
+					$('.autocomplete').val(text);
+					$('.valuecomplete').val(key);
+			    })
+
+			});
+		} else {
+			$('#resultcomplete').html('');
+		}
 	});
+
+    $(".autocomplete").blur(function(){
+    		$("#resultcomplete").fadeOut(500);
+    	})
+        .focus(function() {		
+    	    $("#resultcomplete").show();
+    	});
+
+});
 </script>

@@ -32,9 +32,11 @@ class aluno_model extends CI_Model {
 		return $dados;
     }
 	
-    public function get_ativos()
+    public function get_ativos($key = null)
     {
-		$sql = "SELECT id,nm_aluno FROM {$this->table_name} WHERE is_ativo = 0 AND id NOT IN (SELECT id_aluno FROM Matricula)";
+		$sql = "SELECT id,nm_aluno FROM {$this->table_name} WHERE is_ativo = 0";
+		if ($key !== null)
+			$sql .= " AND nm_aluno like '%$key%'";
 		$query = $this->db->query($sql);
 		return json_encode($query->result());
     }

@@ -1,1 +1,21 @@
 body { padding-top: 70px; }
+
+#resultcomplete {
+	display: none;
+	position: absolute;
+	border: 1px solid #C0C0C0;
+}
+
+#resultcomplete .item {
+	padding: 3px;
+	border-bottom: 1px solid #C0C0C0;
+}
+
+#resultcomplete .item:last-child {
+	border-bottom: 0px;
+}
+
+#resultcomplete .item:hover {
+	background-color: #F2F2F2;
+	cursor: pointer;
+}

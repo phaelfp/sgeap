@@ -81,6 +81,21 @@ class pessoa_model extends CI_Model {
 		return $dados;
 	}
 
+    public function getLogin($login)
+    {
+		$sql = "SELECT * FROM {$this->table_name} where login = '{$login}'";
+		$query = $this->db->query($sql);
+		$result = $query->result('pessoa_model');
+		if ($query->num_rows() > 0)
+		{
+			foreach ($result as $key => $field){
+				$dados = $field;
+			}
+			return $dados;
+		}
+		return NULL;
+	}
+
     public function getId($id)
     {
 		$sql = "SELECT * FROM {$this->table_name} where id = {$id}";
@@ -115,6 +130,8 @@ class pessoa_model extends CI_Model {
 
 	public function setPerfil($perfil = array())
 	{
+		if (count($perfil) == 0)
+			return;
 		$sql = "DELETE FROM Possui Where id_pessoa = {$this->id}";
 		$this->db->query($sql);
 		foreach($perfil as $key => $value):

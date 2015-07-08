@@ -209,6 +209,9 @@ EOF;
 		if ($this->verifica_acesso($registro,'aluno/index'))
 			$cad[] = '<li><a href="'.$base_url.'index.php/aluno">Aluno</a></li>';
 
+		if ($this->verifica_acesso($registro,'pessoa/changepass'))
+			$cad[] = '<li><a href="'.$base_url.'index.php/pessoa/changepass">Alterar Senha</a></li>';
+
 		if (count($cad)>0):
 			$cad = implode("\n",$cad);
 			$menu .= <<<EOF

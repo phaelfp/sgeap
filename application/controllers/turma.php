@@ -78,7 +78,6 @@ class Turma extends CI_Controller {
 		$body['action'] = base_url() .'index.php/turma/updateAluno';
 		$body['turma'] = $item;
 		$body['alunos'] = $this->aluno_model->get_matriculados($id);
-		$body['disponiveis'] = $this->aluno_model->get_ativos();
 		$this->load->view('turma_form_add_aluno', $body);
 		$this->load->view('footer');   
 	}
@@ -93,6 +92,7 @@ class Turma extends CI_Controller {
 		$this->load->model('matricula_model');
 
 		$data = array();
+		$data['id'] = 0;
 		$data['id_turma'] = $this->input->post('id_turma');
 		$data['id_aluno'] = $this->input->post('id_aluno');
 
@@ -242,12 +242,28 @@ class Turma extends CI_Controller {
 
 	}
 
+	public function getAluno()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			echo "";
+			exit;
+		}
+   		$key = $this->uri->segment(3);
+   		$this->load->model('aluno_model');
+		$return = $this->aluno_model->get_ativos($key);
+		echo $return;
+		exit();
+	}
+
 	public function getTurma()
 	{
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			echo "";
+			exit;
 		}
    		$this->load->model('turma_model');
 		$id_anoletivo = $this->input->post('id_anoletivo');

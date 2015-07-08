@@ -63,6 +63,27 @@ class Pessoa extends CI_Controller {
 		$this->load->view('footer');   
 	}
 
+	public function changepass()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
+		$head = array();
+		$head['title'] = 'Pessoa';
+		$this->load->view('header', $head);
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
+		
+		$this->load->model('pessoa_model');
+	    $item = $this->pessoa_model->getLogin($this->registro);
+		$body = array();
+		$body['action'] = base_url() .'index.php/pessoa/passsave';
+		$body['pessoa'] = $item;
+		$this->load->view('pessoa_form_pass', $body);
+		$this->load->view('footer');   
+	}
+
 	public function delete()
 	{
 		$this->load->model('perfil_model');
@@ -95,6 +116,79 @@ TXT;
 		}
 
 		exit();
+	}
+
+	public function passsave()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:../forbidden');exit;
+		}
+		$this->load->model('pessoa_model');
+
+		$head = array();
+		$body = array();
+		$head['title'] = 'Pessoa';
+		$this->load->view('header', $head);
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
+
+		$id          = $this->input->post('id');
+		$password    = $this->input->post('password');
+		$newpassword = $this->input->post('newpassword');
+		$confirmnew  = $this->input->post('confirmnew');
+
+		$pessoa = $this->pessoa_model->getId($id);
+
+		$body['action'] = base_url() .'index.php/pessoa/passsave';
+		$body['pessoa'] = $pessoa;
+		
+		if (empty($password)){
+			$body['error'] = 'Senha Atual deve ser informada';
+			$this->load->view('pessoa_form_pass', $body);
+			$this->load->view('footer');
+			return;
+		}
+		if (empty($newpassword)){
+			$body['error'] = 'A Nova Senha deve ser informada';
+			$this->load->view('pessoa_form_pass', $body);
+			$this->load->view('footer');
+			return;
+		}
+		if (empty($confirmnew)){
+			$body['error'] = 'A Confirmação da Senha deve ser informada';
+			$this->load->view('pessoa_form_pass', $body);
+			$this->load->view('footer');
+			return;
+		}
+		if ($pessoa->password !== sha1($password)){
+			$body['error'] = 'A Senha Atual não confere';
+			$this->load->view('pessoa_form_pass', $body);
+			$this->load->view('footer');
+			return;
+		}
+		if ($newpassword !== $confirmnew){
+			$body['error'] = 'A Nova Senha não confere';
+			$this->load->view('pessoa_form_pass', $body);
+			$this->load->view('footer');
+			return;
+		}
+
+		$data = array(
+			'id' => $id,
+			'password' => sha1($newpassword),
+		);
+
+		$msg = $this->pessoa_model->update($data);
+
+		if (substr($msg,0,4) === 'Erro'):
+			$body['error'] = $msg;
+		else:
+			$body['success'] = $msg;
+		endif;
+
+		$this->load->view('pessoa_form_pass', $body);
+		$this->load->view('footer');   
 	}
 
 	public function save()
