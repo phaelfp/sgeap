@@ -2,6 +2,7 @@ body { padding-top: 70px; }
 
 #resultcomplete {
 	display: none;
+	background-color: #FFF;
 	position: absolute;
 	border: 1px solid #C0C0C0;
 	z-index: 10000;
