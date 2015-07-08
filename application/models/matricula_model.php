@@ -42,6 +42,12 @@ class matricula_model extends CI_Model {
 		return NULL;
 	}
 
+	public function delete($data)
+	{
+		$this->db->delete($this->table_name,$data);
+		return (bool)($this->db->affected_rows()>0);
+	}
+
 	public function insert($data)
 	{
 		array_shift($data);

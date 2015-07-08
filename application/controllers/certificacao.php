@@ -19,7 +19,7 @@ class Certificacao extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Certificação';
@@ -38,7 +38,7 @@ class Certificacao extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Certificação';
@@ -63,7 +63,7 @@ class Certificacao extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('certificacao_model');
 

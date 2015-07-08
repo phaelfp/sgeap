@@ -18,7 +18,7 @@ class Tela extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Tela';
@@ -38,7 +38,7 @@ class Tela extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Tela';
@@ -62,7 +62,7 @@ class Tela extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('tela_model');
 		$id = $this->input->post('id');
@@ -96,7 +96,7 @@ TXT;
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('tela_model');
 

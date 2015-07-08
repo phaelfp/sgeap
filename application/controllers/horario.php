@@ -20,7 +20,7 @@ class Horario extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Horário';
@@ -48,7 +48,7 @@ class Horario extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		//$this->load->model('diahorario_model');
 
@@ -62,7 +62,7 @@ class Horario extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('horario_model');
 		$data = array(
@@ -83,7 +83,7 @@ class Horario extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('horario_model');
 		$horario = $this->horario_model->getId($id);
@@ -97,7 +97,7 @@ class Horario extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
    		$this->load->model('horario_model');
 		$id_turma = $this->input->post('id_turma');
@@ -112,7 +112,7 @@ class Horario extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
    		$this->load->model('oferecimento_model');
 		$id_turma = $this->input->post('id_turma');

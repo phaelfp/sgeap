@@ -16,7 +16,7 @@ class Report extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('report_model');
         $this->load->library('Fpdf');
@@ -147,7 +147,7 @@ class Report extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
         $this->load->library('pdf');
 
@@ -196,7 +196,7 @@ class Report extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('frequencia_model');
         $this->load->library('pdf');

@@ -19,7 +19,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Turma';
@@ -39,7 +39,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Turma';
@@ -64,7 +64,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Turma';
@@ -81,13 +81,31 @@ class Turma extends CI_Controller {
 		$this->load->view('turma_form_add_aluno', $body);
 		$this->load->view('footer');   
 	}
+
+	public function removerAluno()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:' . base_url() . 'index.php/forbidden');exit;
+		}
+		$this->load->model('matricula_model');
+
+		$data = array();
+		$data['id_turma'] = $this->uri->segment(3);
+		$data['id_aluno'] = $this->uri->segment(4);
+
+		$this->matricula_model->delete($data);
+
+		$this->addAluno($data['id_turma']);
+	}
 	
 	public function updateAluno()
 	{
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('matricula_model');
 
@@ -106,7 +124,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('turma_model');
 		$this->load->model('oferecimento_model');
@@ -129,7 +147,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Turma';
@@ -159,7 +177,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Turma';
@@ -179,7 +197,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$head = array();
 		$head['title'] = 'Turma';
@@ -199,7 +217,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
 		{
-			header('location:../forbidden');exit;
+			header('location:' . base_url() . 'index.php/forbidden');exit;
 		}
 		$this->load->model('turma_model');
 		$this->load->model('serie_model');
