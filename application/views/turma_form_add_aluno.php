@@ -33,7 +33,7 @@
 				<div class="col-sm-10">
 			    	<input type="text" name="nm_aluno" id="nm_aluno" class="form-control autocomplete" placeholder="Localizar">
 					<input type="hidden" name="id_aluno" id="id_aluno" value="" class="valuecomplete">
-					<div id="resultcomplete" class="col-sm-9"></div>
+					<div id="resultcomplete" class="col-sm-10"></div>
 				</div>
 			</div>
 			<hr>
