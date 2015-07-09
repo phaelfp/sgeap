@@ -29,6 +29,7 @@ class Pessoa extends CI_Controller {
 		
 		$body = array();
 		$body['list'] = $this->pessoa_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Pessoa::edit');
 		$this->load->view('pessoa_list', $body);
 		$this->load->view('footer');
 	}
@@ -229,7 +230,10 @@ TXT;
 		endif;
 
 		$body['action'] = base_url() .'index.php/pessoa/save';
-		$body['pessoa'] = $this->pessoa_model;
+		$item = $this->pessoa_model->reload();
+		$body['pessoa'] = $item;
+		$body['possui'] = $item->getPossui();
+		$body['perfil'] = $this->perfil_model->getAll();
 		$this->load->view('pessoa_form', $body);
 		$this->load->view('footer');   
 	}

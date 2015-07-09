@@ -1,7 +1,9 @@
 <div class="container" role="main">
+  	<?php if ($edit): ?>
 	<div class="row">
 		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/certificacao/edit" role="button">Nova Certifica&ccedil;&atilde;o</a>
 	</div>
+   	<?php endif; ?>
 	<div class="row">
 		<table class="table table-striped">
 			<tr>
@@ -14,6 +16,7 @@
 		   	<?php foreach($list as $item): ?>
 			<tr>
 				<td>
+   					<?php if ($edit): ?>
 					<div class="btn-group visible-xs-block">
 					  <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">Opções<span class="caret"></span></button>
 					  <ul class="dropdown-menu">
@@ -25,6 +28,7 @@
 						<a class="btn btn-sm btn-info" href="<?php echo base_url();?>index.php/certificacao/edit/<?php echo $item->id ;?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
 						<a class="btn btn-sm btn-danger" href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
 					</div>
+   					<?php endif; ?>
 				</td>
 				<td>
 					<?php echo $item->descricao ;?>
@@ -34,7 +38,9 @@
 		   	<?php endif; ?>
 		</table>
 	</div>
+   	<?php if ($edit): ?>
 	<div class="row">
 		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/certificacao/edit" role="button">Nova Certifica&ccedil;&atilde;o</a>
 	</div>
+   	<?php endif; ?>
 <div>

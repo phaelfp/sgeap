@@ -29,6 +29,7 @@ class AnoLetivo extends CI_Controller {
 		$this->load->model('anoletivo_model');
 		$body = array();
 		$body['list'] = $this->anoletivo_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'AnoLetivo::edit');
 		$this->load->view('anoletivo_list', $body);
 		$this->load->view('footer');
 	}

@@ -29,6 +29,7 @@ class Certificacao extends CI_Controller {
 		$this->load->model('certificacao_model');
 		$body = array();
 		$body['list'] = $this->certificacao_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Certificacao::edit');
 		$this->load->view('certificacao_list', $body);
 		$this->load->view('footer');
 	}

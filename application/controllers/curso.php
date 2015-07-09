@@ -29,6 +29,7 @@ class Curso extends CI_Controller {
 		$this->load->model('curso_model');
 		$body = array();
 		$body['list'] = $this->curso_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Curso::edit');
 		$this->load->view('curso_list', $body);
 		$this->load->view('footer');
 	}

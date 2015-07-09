@@ -29,6 +29,8 @@ class Aluno extends CI_Controller {
 		
 		$body = array();
 		$body['list'] = $this->aluno_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Aluno::edit');
+		$body['del'] = $this->perfil_model->verifica_acesso($this->registro,'Aluno::delete');
 		$this->load->view('aluno_list', $body);
 		$this->load->view('footer');
 	}

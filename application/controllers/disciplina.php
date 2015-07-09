@@ -29,6 +29,7 @@ class Disciplina extends CI_Controller {
 		$this->load->model('disciplina_model');
 		$body = array();
 		$body['list'] = $this->disciplina_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Disciplina::edit');
 		$this->load->view('disciplina_list', $body);
 		$this->load->view('footer');
 	}

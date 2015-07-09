@@ -29,6 +29,7 @@ class Tela extends CI_Controller {
 		
 		$body = array();
 		$body['list'] = $this->tela_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Tela::edit');
 		$this->load->view('tela_list', $body);
 		$this->load->view('footer');
 	}

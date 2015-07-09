@@ -112,6 +112,11 @@ class pessoa_model extends CI_Model {
 		return NULL;
 	}
 
+	public function reload()
+	{
+		return $this->getId($this->id);
+	}
+
 	public function insert($data, $perfil = array())
 	{
 		array_shift($data);

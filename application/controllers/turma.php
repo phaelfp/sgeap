@@ -30,6 +30,9 @@ class Turma extends CI_Controller {
 		
 		$body = array();
 		$body['list'] = $this->turma_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Turma::edit');
+		$body['add'] = $this->perfil_model->verifica_acesso($this->registro,'Turma::add');
+		$body['addAluno'] = $this->perfil_model->verifica_acesso($this->registro,'Turma::addAluno');
 		$this->load->view('turma_list', $body);
 		$this->load->view('footer');
 	}

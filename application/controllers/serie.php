@@ -29,6 +29,7 @@ class Serie extends CI_Controller {
 		$this->load->model('serie_model');
 		$body = array();
 		$body['list'] = $this->serie_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Serie::edit');
 		$this->load->view('serie_list', $body);
 		$this->load->view('footer');
 	}

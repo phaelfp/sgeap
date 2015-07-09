@@ -29,6 +29,7 @@ class Perfil extends CI_Controller {
 		
 		$body = array();
 		$body['list'] = $this->perfil_model->getAll();
+		$body['edit'] = $this->perfil_model->verifica_acesso($this->registro,'Perfil::edit');
 		$this->load->view('perfil_list', $body);
 		$this->load->view('footer');
 	}
