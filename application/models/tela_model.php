@@ -11,10 +11,22 @@ class tela_model extends CI_Model {
 		$this->table_name = 'Tela';
 	}
 
-    public function getAll()
+	public function getCount()
+	{
+		$sql = "SELECT COUNT(*) as size FROM {$this->table_name}";
+		$query = $this->db->query($sql);
+		$result = $query->result();
+		if ($query->num_rows() > 0 )
+			return $result[0]->size;
+		return 0;
+	}
+
+    public function getAll($page=0)
     {
 		$dados = array();
 		$sql = "SELECT * FROM {$this->table_name}";
+		if ($page>0)
+			$sql .= " LIMIT 20 OFFSET ". (($page-1)*20);
 		$query = $this->db->query($sql);
 		$result = $query->result('tela_model');
 		if ($query->num_rows() > 0)

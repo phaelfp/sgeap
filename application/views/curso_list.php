@@ -38,6 +38,23 @@
 		   	<?php endif; ?>
 		</table>
 	</div>
+	<nav>
+	  <ul class="pagination">
+	    <li>
+		<a href="<?php echo base_url();?>index.php/curso/index/<?php echo $page-1;?>" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+		</li>
+		<?php for($i=0;$i<$pages;$i++): ?>
+		<li><a href="<?php echo base_url() ?>index.php/curso/index/<?php echo $i+1 ?>"><?php echo $i+1 ?></a></li>
+		<?php endfor; ?>
+	    <li>
+		  <a href="<?php echo base_url();?>index.php/curso/index/<?php echo $page+1;?>" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
 	<?php if ($edit): ?>
 	<div class="row">
 		<a class="btn btn-primary" href="<?php echo base_url();?>index.php/curso/edit" role="button">Novo Curso</a>
