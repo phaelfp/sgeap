@@ -31,8 +31,7 @@ class Serie extends CI_Controller {
 		if (empty($page))
 			$page=1;
 		$size = $this->serie_model->getCount();
-		$pages = (int) $size/20;
-		if ($size%20) $pages++;
+		$pages = ceil($size/20);
 		$body = array();
 		$body['list'] = $this->serie_model->getAll($page);
 		$body['pages'] = $pages;

@@ -30,8 +30,7 @@ class Aluno extends CI_Controller {
 		if (empty($page))
 			$page=1;
 		$size = $this->aluno_model->getCount();
-		$pages = (int) $size/20;
-		if ($size%20) $pages++;
+		$pages = ceil($size/20);
 		
 		$body = array();
 		$body['list'] = $this->aluno_model->getAll($page);

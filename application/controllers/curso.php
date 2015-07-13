@@ -31,8 +31,7 @@ class Curso extends CI_Controller {
 		if (empty($page))
 			$page=1;
 		$size = $this->curso_model->getCount();
-		$pages = (int) $size/20;
-		if ($size%20) $pages++;
+		$pages = ceil($size/20);
 		$body = array();
 		$body['list'] = $this->curso_model->getAll($page);
 		$body['pages'] = $pages;

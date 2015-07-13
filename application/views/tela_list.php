@@ -40,16 +40,20 @@
 		</table>
 	</div>
 	<nav>
-	  <ul class="pagination">
-	    <li>
-		<a href="<?php echo base_url();?>index.php/tela/index/<?php echo $page-1;?>" aria-label="Previous">
+	  <ul class="pagination">		
+	    <li<?php if ($page == 1): ?> class="disabled"<?php endif; ?>>
+          <a href="<?php echo base_url();?>index.php/tela/index/<?php echo $page-1;?>" aria-label="Previous">
 	        <span aria-hidden="true">&laquo;</span>
 	      </a>
 		</li>
 		<?php for($i=0;$i<$pages;$i++): ?>
-		<li><a href="<?php echo base_url() ?>index.php/tela/index/<?php echo $i+1 ?>"><?php echo $i+1 ?></a></li>
+		<li<?php if(($i+1)==$page):?> class="active"<?php endif;?>>
+		  <a href="<?php echo base_url() ?>index.php/tela/index/<?php echo $i+1 ?>">
+			<?php echo $i+1; if (($i+1)==$page): echo "<span class=\"sr-only\">(current)</span>"; endif;?>
+		  </a>
+		</li>
 		<?php endfor; ?>
-	    <li>
+	    <li<?php if ($page == $i): ?> class="disabled"<?php endif; ?>>
 		  <a href="<?php echo base_url();?>index.php/tela/index/<?php echo $page+1;?>" aria-label="Next">
 	        <span aria-hidden="true">&raquo;</span>
 	      </a>
