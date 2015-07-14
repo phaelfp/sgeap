@@ -43,6 +43,25 @@ class Horario extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	public function listaHorario()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:' . base_url() . 'index.php/forbidden');exit;
+		}
+		$this->load->model('anoletivo_model');
+		$head = array();
+		$head['title'] = 'Horário';
+		$this->load->view('header', $head);
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
+		$body = array();
+		$body['anoletivo'] = $this->anoletivo_model->getAll();
+		$body['action'] = base_url() .'index.php/report/listaHorario';
+		$this->load->view('horario_listahorario', $body);
+		$this->load->view('footer');
+	}
+
 	public function save()
 	{
 		$this->load->model('perfil_model');

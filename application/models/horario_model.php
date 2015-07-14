@@ -94,4 +94,52 @@ class horario_model extends CI_Model {
 		return $horarios;
 	}
 
+	public function getListaHorario($id_anoletivo, $por_dia = true)
+	{
+		$sql = <<<EOF
+select t.id_anoletivo
+, case dh.id_dia_semana when 2 then
+concat(t.descricao,' - ',SUBSTRING(d.impressao,1,3)) else '' end as segunda
+, case dh.id_dia_semana when 3 then
+concat(t.descricao,' - ',SUBSTRING(d.impressao,1,3)) else '' end as terca
+, case dh.id_dia_semana when 4 then
+concat(t.descricao,' - ',SUBSTRING(d.impressao,1,3)) else '' end as quarta
+, case dh.id_dia_semana when 5 then
+concat(t.descricao,' - ',SUBSTRING(d.impressao,1,3)) else '' end as quinta
+, case dh.id_dia_semana when 6 then
+concat(t.descricao,' - ',SUBSTRING(d.impressao,1,3)) else '' end as sexta
+, case dh.id_dia_semana when 7 then
+concat(t.descricao,' - ',SUBSTRING(d.impressao,1,3)) else '' end as sabado
+, case dh.id_horario when 1 then '18:00'
+when 2 then '18:40'
+when 3 then '19:35'
+when 4 then '20:05'
+when 5 then '20:45'
+when 6 then '21:25'
+end as inicio
+, case (dh.id_horario+dh.n_tempos) when 2 then '18:40'
+when 3 then '19:20'
+when 4 then '20:05'
+when 5 then '20:45'
+when 6 then '21:25'
+when 7 then '22:05'
+end as termino
+, dh.n_tempos
+from diahorario as dh
+inner join turma as t
+  on dh.id_turma = t.id
+inner join disciplina as d
+  on dh.id_disciplina = d.id
+EOF;
+		$sql .= " where t.id_anoletivo = {$id_anoletivo}";
+		if ($por_dia):
+			$sql .= " order by dh.id_horario, dh.id_dia_semana";
+		else:
+			$sql .= " order by dh.id_turma, dh.id_horario";
+		endif;
+		$query = $this->db->query($sql);
+		$result = $query->result_array();
+		return $result;
+	}
+
 }

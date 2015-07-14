@@ -191,6 +191,39 @@ class Report extends CI_Controller {
 		exit();
 	}
 
+	public function listaHorario()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:' . base_url() . 'index.php/forbidden');exit;
+		}
+		$this->load->model('horario_model');
+        $this->load->library('pdf');
+		$id_anoletivo = $this->input->post('id_anoletivo');
+		$horarios = $this->horario_model->getListaHorario($id_anoletivo);
+		$pdf = new pdf();
+		$pdf->SetFont('Arial','',10);
+		$dias = array('Segunda-Feira','Terça-Feira','Quarta-Feira','Quinta-Feira','Sexta-Feira','Sábado');
+		$diacoluna = array('segunda','terca','quarta','quinta','sexta','sabado');
+		$pdf->AddPage('L');
+		$pdf->Cell(30,5,'',0,0);
+		foreach($dias as $key=>$value){
+			$pdf->Cell(30,5, utf8_decode($value),1,0,'C');
+		}
+		$pdf->Ln(5);
+
+		foreach($horarios as $k => $item){
+			$pdf->Cell(30,5, $item['inicio']. utf8_decode(' às ') . $item['termino'],1,0,'C');
+			foreach($diacoluna as $idx => $column)
+				$pdf->Cell(30, 5,utf8_decode($item[$column]),1,0,'C');
+			$pdf->Ln(5);
+		}
+
+        $pdf->Output();
+		exit();
+	}
+
 	public function listaFrequencia()
 	{
 		$this->load->model('perfil_model');

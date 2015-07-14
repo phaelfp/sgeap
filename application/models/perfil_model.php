@@ -243,6 +243,9 @@ EOF;
 		if ($this->verifica_acesso($registro,'turma/listaFrequencia'))
 			$rel[] = '<li><a href="'.$base_url.'index.php/turma/listaFrequencia">Frequencia (Diario)</a></li>';
 
+		if ($this->verifica_acesso($registro,'horario/listaHorario'))
+			$rel[] = '<li><a href="'.$base_url.'index.php/horario/listaHorario">Horários</a></li>';
+
 
 		if (count($rel)>0):
 			$rel = implode("\n",$rel);
