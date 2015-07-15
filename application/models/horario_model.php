@@ -125,10 +125,10 @@ when 6 then '21:25'
 when 7 then '22:05'
 end as termino
 , dh.n_tempos
-from diahorario as dh
-inner join turma as t
+from DiaHorario as dh
+inner join Turma as t
   on dh.id_turma = t.id
-inner join disciplina as d
+inner join Disciplina as d
   on dh.id_disciplina = d.id
 EOF;
 		$sql .= " where t.id_anoletivo = {$id_anoletivo}";
