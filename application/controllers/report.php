@@ -5,12 +5,12 @@ class Report extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->registro 	= $this->session->userdata('registro');
-		$this->usuario 	 	= strtoupper($this->session->userdata('usuario'));		
+		$this->usuario 	 	= strtoupper($this->session->userdata('usuario'));
 		if(empty($this->registro) || empty($this->usuario)){
 			header('location:../login/logoff');exit;
 		}
 	}
-	
+
 	public function index()
 	{
 		$this->load->model('perfil_model');
@@ -41,10 +41,10 @@ class Report extends CI_Controller {
 					$pdf->Text( 24, 27, $this->getMes(substr($yearmonth['dt_ym'],4,2)));
 					$pdf->SetXY(10,31);
 
-					/* 
-					 * Primeira linha para os dias e aferições 
+					/*
+					 * Primeira linha para os dias e aferições
 					 */
-					
+
 					$pdf->Rect(  10,  31, 5, 5.5);
 					$pdf->Rect(  15,  31, 5, 5.5);
 					$pdf->Rect(  20,  31, 5, 5.5);
@@ -74,9 +74,9 @@ class Report extends CI_Controller {
 
 					//$pdf->Cell(30, 5,"{$course['description']}",0,0);
 					//$pdf->Cell( 0, 5, $this->getMes(substr($yearmonth['dt_ym'],4,2)) . " / " . substr($yearmonth['dt_ym'],0,4),0,1);
-					
+
 					$pdf->Cell(5,5.5,utf8_decode("Nº"),0,0);
-					foreach($this->report_model->getAttendanceDay($yearmonth['dt_ym'], $course['id']) as $day):                        
+					foreach($this->report_model->getAttendanceDay($yearmonth['dt_ym'], $course['id']) as $day):
 						$pdf->Cell(5,5.5,"{$day}",0,0,'C');
 						$pdf->Cell(5,5.5,"{$day}",0,0,'C');
 					endforeach;
@@ -254,10 +254,10 @@ class Report extends CI_Controller {
 					$pdf->Text( 24, 27, $this->getMes(substr($yearmonth['dt_ym'],4,2)));
 					$pdf->SetXY(10,31);
 
-					/* 
-					 * Primeira linha para os dias e aferições 
+					/*
+					 * Primeira linha para os dias e aferições
 					 */
-					
+
 					$pdf->Rect(  10,  31, 5, 5.5);
 					$pdf->Rect(  15,  31, 5, 5.5);
 					$pdf->Rect(  20,  31, 5, 5.5);
@@ -284,7 +284,7 @@ class Report extends CI_Controller {
 					$pdf->Rect( 126,  31,11, 5.5);
 					$pdf->Rect( 137,  31,11, 5.5);
 					$pdf->Rect( 148,  31,11, 5.5);
-					
+
 					$pdf->Cell(5,5.5,utf8_decode("Nº"),0,0);
 					foreach($this->frequencia_model->getDiaFrequencia($id_turma, $disciplina['id'], $yearmonth['dt_ym']) as $dia):
 						for ($tempo=0;$tempo<$dia['n_tempos'];$tempo++)
@@ -330,6 +330,48 @@ class Report extends CI_Controller {
 			endif;
 		endforeach;
         $pdf->Output();
+		exit();
+	}
+
+
+	public function listaNota()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:' . base_url() . 'index.php/forbidden');exit;
+		}
+  	$this->load->library('pdf');
+		$pdf = new pdf();
+		$pdf->SetFont('Arial','',10);
+		$this->load->model('report_model');
+		$id_turma = $this->input->post('id_turma');
+		$id_certificacao = $this->input->post('id_certificacao');
+		$notas = $this->report_model->getNotas($id_turma, $id_certificacao);
+		$last_certificacao = '';
+		$last_disciplina = '';
+		foreach($notas as $id => $nota):
+			if ($last_certificacao !== $nota->nm_certificacao):
+				$pdf->AddPage('P');
+				$last_certificacao = $nota->nm_certificacao;
+				$last_disciplina = $nota->nm_disciplina;
+				$pdf->Cell( 50,5.5, utf8_decode($last_certificacao));
+				$pdf->Cell(100,5.5, utf8_decode($last_disciplina),0,1,'C');
+				$pdf->Cell(100,5.5, 'NOME',0,0,'C');
+				$pdf->Cell(20,5.5, 'NOTA',0,1,'C');
+			endif;
+			if ($last_disciplina !== $nota->nm_disciplina):
+				$pdf->AddPage('P');
+				$last_disciplina = $nota->nm_disciplina;
+				$pdf->Cell( 50,5.5, utf8_decode($last_certificacao));
+				$pdf->Cell(100,5.5, utf8_decode($last_disciplina),0,1,'C');
+				$pdf->Cell(100,5.5, 'NOME',0,0,'C');
+				$pdf->Cell(20,5.5, 'NOTA',0,1,'C');
+			endif;
+			$pdf->Cell(100,5.5, utf8_decode($nota->nm_aluno),0,0,'R');
+			$pdf->Cell(20,5.5, utf8_decode($nota->nota),0,1,'C');
+		endforeach;
+		$pdf->Output();
 		exit();
 	}
 }

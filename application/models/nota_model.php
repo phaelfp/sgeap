@@ -1,5 +1,5 @@
 <?php
-		
+
 class nota_model extends CI_Model {
 
 	public $id;
@@ -25,11 +25,11 @@ class nota_model extends CI_Model {
 		{
 			foreach ($result as $key => $field){
 				$dados[] = $field;
-			}			
+			}
 		}
 		return $dados;
     }
-	
+
     public function getId($id)
     {
 		$sql = "SELECT * FROM {$this->table_name} where id = {$id}";
@@ -45,11 +45,18 @@ class nota_model extends CI_Model {
 		return NULL;
 	}
 
+	public function store($data, $perfil = array())
+	{
+		$this->db->insert($this->table_name, $data);
+		$this->id = $this->db->insert_id();
+		return ($this->db->affected_rows())?"Registro inserido com sucesso!":"Erro: ao inserir o registro.";
+	}
+
 	public function insert($data, $perfil = array())
 	{
 		array_shift($data);
 		$this->db->insert($this->table_name, $data);
-		$this->id = $this->db->insert_id;
+		$this->id = $this->db->insert_id();
 		return ($this->db->affected_rows())?"Registro inserido com sucesso!":"Erro: ao inserir o registro.";
 	}
 
@@ -73,6 +80,16 @@ class nota_model extends CI_Model {
 		$this->id = $where["id" ] = $id;
         $this->db->delete($this->table_name, $where);
 		return ($this->db->affected_rows())?"Registro excluido com sucesso!":"Erro: ao excluir o registro.";
+	}
+
+	public function getAlunoJSON($id_turma)
+	{
+		$this->db->select('Aluno.*');
+		$this->db->from('Matricula');
+		$this->db->join('Aluno','Aluno.id = Matricula.id_aluno');
+		$this->db->where('Matricula.id_turma',$id_turma);
+		$query = $this->db->get();
+		return $result = $query->result_array();
 	}
 
 }

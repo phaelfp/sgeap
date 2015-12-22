@@ -12,7 +12,7 @@ class Turma extends CI_Controller {
 		$this->load->model('perfil_model');
 		$this->menu = $this->perfil_model->getMenu($this->registro);
 	}
-	
+
 
 	public function index()
 	{
@@ -25,7 +25,7 @@ class Turma extends CI_Controller {
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
 		$this->load->view('nav_menu', array('menu'=>$this->menu));
-		
+
 		$this->load->model('turma_model');
 
 		$page = $this->uri->segment(3);
@@ -33,7 +33,7 @@ class Turma extends CI_Controller {
 			$page=1;
 		$size = $this->turma_model->getCount();
 		$pages = ceil($size/20);
-		
+
 		$body = array();
 		$body['list'] = $this->turma_model->getAll($page);
 		$body['pages'] = $pages;
@@ -56,7 +56,7 @@ class Turma extends CI_Controller {
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
 		$this->load->view('nav_menu', array('menu'=>$this->menu));
-		
+
 		$this->load->model('turma_model');
 		$this->load->model('oferecimento_model');
 		$this->load->model('disciplina_model');
@@ -67,7 +67,7 @@ class Turma extends CI_Controller {
 		$body['oferecimento'] = $this->oferecimento_model->get_enabled($id);
 		$body['disciplinas'] = $this->disciplina_model->getAll();
 		$this->load->view('turma_form_add', $body);
-		$this->load->view('footer');   
+		$this->load->view('footer');
 	}
 
 	public function addAluno($id)
@@ -81,7 +81,7 @@ class Turma extends CI_Controller {
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
 		$this->load->view('nav_menu', array('menu'=>$this->menu));
-		
+
 		$this->load->model('turma_model');
 		$this->load->model('aluno_model');
 	    $item = $this->turma_model->getId($id);
@@ -90,7 +90,7 @@ class Turma extends CI_Controller {
 		$body['turma'] = $item;
 		$body['alunos'] = $this->aluno_model->get_matriculados($id);
 		$this->load->view('turma_form_add_aluno', $body);
-		$this->load->view('footer');   
+		$this->load->view('footer');
 	}
 
 	public function removerAluno()
@@ -110,7 +110,7 @@ class Turma extends CI_Controller {
 
 		$this->addAluno($data['id_turma']);
 	}
-	
+
 	public function updateAluno()
 	{
 		$this->load->model('perfil_model');
@@ -164,7 +164,7 @@ class Turma extends CI_Controller {
 		$head['title'] = 'Turma';
 		$this->load->view('header', $head);
 		$this->load->view('nav_menu', array('menu'=>$this->menu));
-		
+
 		$this->load->model('turma_model');
 		$this->load->model('serie_model');
 		$this->load->model('curso_model');
@@ -180,7 +180,7 @@ class Turma extends CI_Controller {
 		$body['serie'] = $this->serie_model->getCombo();
 		$body['curso'] = $this->curso_model->getCombo();
 		$this->load->view('turma_form', $body);
-		$this->load->view('footer');   
+		$this->load->view('footer');
 	}
 
 	public function listaPresenca()
@@ -200,7 +200,29 @@ class Turma extends CI_Controller {
 		$body['form_target'] = '_blank';
 		$body['anoletivo'] = $this->anoletivo_model->getAll();
 		$this->load->view('turma_lista_presenca', $body);
-		$this->load->view('footer');   
+		$this->load->view('footer');
+	}
+
+	public function listaNota()
+	{
+		$this->load->model('perfil_model');
+		if (!$this->perfil_model->verifica_acesso($this->registro,__METHOD__))
+		{
+			header('location:' . base_url() . 'index.php/forbidden');exit;
+		}
+		$head = array();
+		$head['title'] = 'Turma';
+		$this->load->view('header', $head);
+		$this->load->view('nav_menu', array('menu'=>$this->menu));
+		$this->load->model('anoletivo_model');
+		$this->load->model('certificacao_model');
+		$body = array();
+		$body['action'] = base_url() .'index.php/report/listaNota';
+		$body['form_target'] = '_blank';
+		$body['anoletivo'] = $this->anoletivo_model->getAll();
+		$body['certificacao'] = $this->certificacao_model->getAll();
+		$this->load->view('turma_nota', $body);
+		$this->load->view('footer');
 	}
 
 	public function listaFrequencia()
@@ -220,7 +242,7 @@ class Turma extends CI_Controller {
 		$body['form_target'] = '_blank';
 		$body['anoletivo'] = $this->anoletivo_model->getAll();
 		$this->load->view('turma_lista_presenca', $body);
-		$this->load->view('footer');   
+		$this->load->view('footer');
 	}
 
 	public function save()
@@ -267,7 +289,7 @@ class Turma extends CI_Controller {
 		$body['serie'] = $this->serie_model->getCombo();
 		$body['curso'] = $this->curso_model->getCombo();
 		$this->load->view('turma_form', $body);
-		$this->load->view('footer');   
+		$this->load->view('footer');
 
 	}
 
@@ -303,4 +325,3 @@ class Turma extends CI_Controller {
 		exit();
    	}
 }
-

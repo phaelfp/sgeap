@@ -1,5 +1,5 @@
 <?php
-		
+
 class report_model extends CI_Model {
 
 	public function getCourses()
@@ -28,7 +28,7 @@ class report_model extends CI_Model {
 		$query = $this->db->get();
 		return $query->result_array();
 	}
-	
+
 	public function getStudents($id)
 	{
 		$this->db->select('student.id, student.name, class.id as id_class');
@@ -64,5 +64,28 @@ class report_model extends CI_Model {
         return $days;
 	}
 
-}
+	public function getNotas($id_turma, $id_certificacao)
+	{
+		$this->db->select('Certificacao.media');
+		$this->db->from('Certificacao');
+		$this->db->where('id_certificacao', $id_certificacao);
+		$query = $this->db->get();
+		$result = $query->result_array();
+		if (isset($result[0]['media'])):
+			$agrecate = $result[0]['media'];
+		else:
+			$agrecate = 'sum';
+		endif;
+		$this->db->select('Aluno.nm_aluno, Disciplina.impressao as nm_disciplina, Certificacao.descricao as nm_certificacao, '.$agrecate.'(Nota.nota) as nota');
+		$this->db->from('Nota');
+		$this->db->join('Aluno','Aluno.id = Nota.id_aluno');
+		$this->db->join('Disciplina','Disciplina.id = Nota.id_disciplina');
+		$this->db->join('Certificacao','Certificacao.id = Nota.id_certificacao');
+		$this->db->where('Nota.id_turma', $id_turma);
+		$this->db->where('Nota.id_certificacao', $id_certificacao);
+		$this->db->group_by(array('Certificacao.descricao','Disciplina.descricao', 'Aluno.nm_aluno'));
+		$query = $this->db->get();
+		return $result = $query->result();
+	}
 
+}

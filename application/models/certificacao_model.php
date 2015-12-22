@@ -1,5 +1,5 @@
 <?php
-		
+
 class certificacao_model extends CI_Model {
 
 	public $id;
@@ -37,7 +37,7 @@ class certificacao_model extends CI_Model {
 		}
 		return $dados;
     }
-	
+
     public function getId($id)
     {
 		$sql = "SELECT * FROM {$this->table_name} where id = {$id}";
@@ -57,7 +57,7 @@ class certificacao_model extends CI_Model {
 	{
 		array_shift($data);
 		$this->db->insert($this->table_name, $data);
-		$this->id = $this->db->insert_id;
+		$this->id = $this->db->insert_id();
 		return ($this->db->affected_rows())?"Registro inserido com sucesso!":"Erro: ao inserir o registro.";
 	}
 

@@ -1,5 +1,5 @@
 <?php
-		
+
 class turma_model extends CI_Model {
 
 	public $id;
@@ -37,8 +37,8 @@ class turma_model extends CI_Model {
 		$this->db->select('Serie.*');
 		$this->db->from('Turma');
 		$this->db->join('Serie','Turma.id_serie = Serie.id');
-        $this->db->where('Turma.id_anoletivo',$id_anoletivo);
-        $this->db->where('Turma.id_curso',$id_curso);
+    $this->db->where('Turma.id_anoletivo',$id_anoletivo);
+    $this->db->where('Turma.id_curso',$id_curso);
 		$query = $this->db->get();
 		$result = $query->result_array();
 		foreach($result as $key => $row):
@@ -65,7 +65,7 @@ class turma_model extends CI_Model {
 	}
 
 	public function get_anoletivo()
-	{                               
+	{
 		$sql = "SELECT * FROM AnoLetivo WHERE id = {$this->id_anoletivo}";
 		$query = $this->db->query($sql);
 		if ($query->num_rows() > 0):
@@ -74,7 +74,7 @@ class turma_model extends CI_Model {
 		endif;
 		return '';
 	}
-	
+
 	public function get_curso()
 	{
 		$sql = "SELECT * FROM Curso WHERE id = {$this->id_curso}";
@@ -119,11 +119,11 @@ class turma_model extends CI_Model {
 		{
 			foreach ($result as $key => $field){
 				$dados[] = $field;
-			}			
+			}
 		}
 		return $dados;
     }
-	
+
 	public function getCombo()
     {
 		$dados = array();
@@ -139,7 +139,7 @@ class turma_model extends CI_Model {
 		{
 			foreach ($result as $key => $field){
 				$dados[$field->id] = "{$field->anoletivo} / {$field->curso} / {$field->serie}";
-			}			
+			}
 		}
 		return $dados;
 	}

@@ -1,12 +1,12 @@
 <?php
-		
+
 class aluno_model extends CI_Model {
 
 	public $id;
 	public $nm_aluno;
 	public $cpf;
 	public $banco;
-    public $agencia;
+  public $agencia;
 	public $c_corrente;
 	public $is_ativo;
 	public $is_trancado;
@@ -39,11 +39,11 @@ class aluno_model extends CI_Model {
 		{
 			foreach ($result as $key => $field){
 				$dados[] = $field;
-			}			
+			}
 		}
 		return $dados;
     }
-	
+
     public function get_ativos($key = null)
     {
 		$sql = "SELECT id,nm_aluno FROM {$this->table_name} WHERE is_ativo = 0";
@@ -52,14 +52,14 @@ class aluno_model extends CI_Model {
 		$query = $this->db->query($sql);
 		return json_encode($query->result());
     }
-	
+
     public function get_matriculados($id_turma)
     {
 		$sql = "SELECT * FROM {$this->table_name} WHERE id IN (SELECT id_aluno FROM Matricula WHERE id_turma = {$id_turma})";
 		$query = $this->db->query($sql);
 		return $query->result();
     }
-	
+
 	public function getCombo()
     {
 		$dados = array();
@@ -72,7 +72,7 @@ class aluno_model extends CI_Model {
 		{
 			foreach ($result as $key => $field){
 				$dados[$field->id] = "{$field->nm_aluno}";
-			}			
+			}
 		}
 		return $dados;
 	}

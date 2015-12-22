@@ -1,5 +1,5 @@
 <?php
-		
+
 class perfil_model extends CI_Model {
 
 	public $id;
@@ -33,11 +33,11 @@ class perfil_model extends CI_Model {
 		{
 			foreach ($result as $key => $field){
 				$dados[] = $field;
-			}			
+			}
 		}
 		return $dados;
     }
-	
+
     public function getId($id)
     {
 		$sql = "SELECT * FROM {$this->table_name} where id = {$id}";
@@ -99,7 +99,7 @@ class perfil_model extends CI_Model {
 		{
 			foreach ($result as $key => $field){
 				$dados[] = $field->id_tela;
-			}			
+			}
 		}
 		return $dados;
 	}
@@ -108,7 +108,7 @@ class perfil_model extends CI_Model {
 	{
 		$tela = trim(strtolower(str_replace('::','/',$nome_tela)));
 		$sql = <<<EOF
-SELECT count(1) as acessa 
+SELECT count(1) as acessa
 FROM Tela as t
 INNER JOIN Acessa as a
    ON t.id = a.id_tela
@@ -136,7 +136,7 @@ EOF;
 		{
 			foreach ($result as $key => $field){
 				$dados[] = $field;
-			}			
+			}
 		}
 		return $dados;
 	}
@@ -164,7 +164,7 @@ EOF;
         <span class="icon-bar"></span>
       </button>
 	  <a class="navbar-brand" href="{$base_url}">SGEAP</a>
-    </div>    
+    </div>
     <div class="collapse navbar-collapse" id="bs-navbar-collapse">
 	  <ul class="nav navbar-nav">
 EOF;
@@ -174,7 +174,7 @@ EOF;
 
         if ($this->verifica_acesso($registro,'perfil/index'))
 			$admin[] = '<li><a href="'.$base_url.'index.php/perfil">Perfil</a></li>';
-		
+
         if ($this->verifica_acesso($registro,'tela/index'))
 			$admin[] = '<li><a href="'.$base_url.'index.php/tela">Tela</a></li>';
 
@@ -196,16 +196,16 @@ EOF;
 
 		if ($this->verifica_acesso($registro,'serie/index'))
 			$cad[] = '<li><a href="'.$base_url.'index.php/serie">S&eacute;rie</a></li>';
-			
+
 		if ($this->verifica_acesso($registro,'curso/index'))
 			$cad[] = '<li><a href="'.$base_url.'index.php/curso">Curso</a></li>';
-			
+
 		if ($this->verifica_acesso($registro,'certificacao/index'))
 			$cad[] = '<li><a href="'.$base_url.'index.php/certificacao">Certifica&ccedil;&atilde;o</a></li>';
 
 		if (count($cad)>0)
 			$cad[] = '<li class="divider"></li>';
-			
+
 		if ($this->verifica_acesso($registro,'disciplina/index'))
 			$cad[] = '<li><a href="'.$base_url.'index.php/disciplina">Disciplina</a></li>';
 
@@ -217,7 +217,7 @@ EOF;
 
 		if (count($cad)>3)
 			$cad[] = '<li class="divider"></li>';
-			
+
 		if ($this->verifica_acesso($registro,'aluno/index'))
 			$cad[] = '<li><a href="'.$base_url.'index.php/aluno">Aluno</a></li>';
 
@@ -243,9 +243,11 @@ EOF;
 		if ($this->verifica_acesso($registro,'turma/listaFrequencia'))
 			$rel[] = '<li><a href="'.$base_url.'index.php/turma/listaFrequencia">Frequencia (Diario)</a></li>';
 
+		if ($this->verifica_acesso($registro,'turma/listaNota'))
+				$rel[] = '<li><a href="'.$base_url.'index.php/turma/listaNota">Nota</a></li>';
+
 		if ($this->verifica_acesso($registro,'horario/listaHorario'))
 			$rel[] = '<li><a href="'.$base_url.'index.php/horario/listaHorario">Horários</a></li>';
-
 
 		if (count($rel)>0):
 			$rel = implode("\n",$rel);
@@ -258,7 +260,7 @@ EOF;
 		</li>
 EOF;
 		endif;
-	
+
 		if ($this->verifica_acesso($registro,'matricula/index')):
 			$menu .= <<<EOF
         <li class="dropdown">
@@ -274,6 +276,15 @@ EOF;
         </li>
 EOF;
 		endif;
+
+		if ($this->verifica_acesso($registro,'nota/index')):
+			$menu .= <<<EOF
+        <li class="dropdown">
+			<a href="{$base_url}index.php/nota">Nota</a>
+        </li>
+EOF;
+		endif;
+
 
 		$menu .= <<<EOF
         <li class="dropdown">

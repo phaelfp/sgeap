@@ -12,7 +12,7 @@ class Certificacao extends CI_Controller {
 		$this->load->model('perfil_model');
 		$this->menu = $this->perfil_model->getMenu($this->registro);
 	}
-	
+
 
 	public function index()
 	{
@@ -25,7 +25,7 @@ class Certificacao extends CI_Controller {
 		$head['title'] = 'Certificação';
 		$this->load->view('header', $head);
 		$this->load->view('nav_menu', array('menu'=>$this->menu));
-		
+
 		$this->load->model('certificacao_model');
 		$page = $this->uri->segment(3);
 		if (empty($page))
@@ -52,7 +52,7 @@ class Certificacao extends CI_Controller {
 		$head['title'] = 'Certificação';
 		$this->load->view('header', $head);
 		$this->load->view('nav_menu', array('menu'=>$this->menu));
-		
+
 		$this->load->model('certificacao_model');
 		if (empty($id)):
 			$id=0 ;
@@ -63,7 +63,7 @@ class Certificacao extends CI_Controller {
 		$body['certificacao'] = $item;
 		$body['certificacoes'] = $this->certificacao_model->getAll();
 		$this->load->view('certificacao_form', $body);
-		$this->load->view('footer');   
+		$this->load->view('footer');
 	}
 
 	public function save()
@@ -87,7 +87,8 @@ class Certificacao extends CI_Controller {
 			'id_certificacao' => $this->input->post('id_certificacao'),
 		);
 		$body = array();
-
+		if (empty($data['id_certificacao']))
+			unset($data['id_certificacao']);
 		if(empty($data['id'])):
 			$msg = $this->certificacao_model->insert($data);
 		else:
@@ -102,9 +103,9 @@ class Certificacao extends CI_Controller {
 
 		$body['action'] = base_url() .'index.php/certificacao/save';
 		$body['certificacao'] = (object)$data;
+		$body['certificacoes'] = $this->certificacao_model->getAll();
 		$this->load->view('certificacao_form', $body);
-		$this->load->view('footer');   
+		$this->load->view('footer');
 
 	}
 }
-
