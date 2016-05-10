@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="calculadora.js"></script>
+  <title>Calculadora</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <img src="image00.png" alt="Otimize" class="center-block img-responsive">
+    </div>
+    <form id="calculadora" class="form-horizontal">
+      <div class="form-group">
+          <label for="periodo_simulacao" class="col-sm-4 control-label">Período de Simulação:</label>
+          <div class="input-group col-sm-6">
+            <div class="input-group-addon">Meses</div>
+            <input type="text" class="form-control" id="periodo_simulacao">
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="pedido_mensal" class="col-sm-4 control-label">Pedido Atual Mensal:</label>
+          <div class="input-group col-sm-6">
+            <div class="input-group-addon">R$</div>
+            <input type="text" class="form-control" id="pedido_mensal">
+          </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-6">
+          <button type="button" class="btn btn-default" id="calcular">Calcular</button>
+        </div>
+      </div>
+      <div id="resultado">
+        <div class="form-group">
+            <label for="pedido_atual_periodo" class="col-sm-4 control-label">Pedido Atual Durante o Período:</label>
+            <div class="input-group col-sm-6">
+              <div class="input-group-addon">R$</div>
+              <input type="text" class="form-control" id="pedido_atual_periodo">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="periodo_simulacao2" class="col-sm-4 control-label">Período de Simulação:</label>
+            <div class="input-group col-sm-6">
+              <div class="input-group-addon">Meses</div>
+              <input type="text" class="form-control" id="periodo_simulacao2">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pedido_otimiza" class="col-sm-4 control-label">Pedido OTIMIZA Mensal:</label>
+            <div class="input-group col-sm-6">
+              <div class="input-group-addon">R$</div>
+              <input type="text" class="form-control" id="pedido_otimiza">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pedido_otimiza_periodo" class="col-sm-4 control-label">Pedido OTIMIZA Durante o Período:</label>
+            <div class="input-group col-sm-6">
+              <div class="input-group-addon">R$</div>
+              <input type="text" class="form-control" id="pedido_otimiza_periodo">
+            </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-sm-4">RCA Inicial</div>
+      <div class="col-sm-4">Economia Mensal</div>
+      <div class="col-sm-4">Economia do Periodo</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4" id="rca_inicial"></div>
+      <div class="col-sm-4" id="economia_mensal"></div>
+      <div class="col-sm-4" id="economia_periodo"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4"><p class="pull-right" id="percentual_pedido"></p></div>
+      <div class="col-sm-4"><p class="pull-right" id="percentual_mensal"></p></div>
+    </div>
+  </div>
+  <script>
+    $( document ).ready(function() {
+      $('#calcular').click(function(){
+        let valor = $('#pedido_mensal').val();
+        let parcelas = $('#periodo_simulacao').val();
+        let valor_periodo = Number(valor*parcelas);
+        let economia_bruta = Number(valor*tabela_auxiliar.economia_bruta);
+        let pedido_reduzido = Number(valor-economia_bruta);
+        let taxa_administrativa = Number(valor*getFee(valor));
+        let recuperacao = Number(economia_bruta*getExito(valor));
+        let pedido = Number(pedido_reduzido+taxa_administrativa+recuperacao);
+        let pedido_periodo = Number(pedido*parcelas);
+        let rca_inicial = Number(valor*tabela_auxiliar.rca_inicial);
+        let economia_mensal = Number(valor-pedido);
+        let economia_periodo = Number(valor_periodo-pedido_periodo);
+        let options1 = { style: "percent" };
+        let options2 = { style: "currency", currency: "BRL" };
+
+        $('#periodo_simulacao2').val($('#periodo_simulacao').val());
+        $('#pedido_atual_periodo').val(valor_periodo.toLocaleString("pt-BR", options2));
+        $('#pedido_otimiza').val(pedido.toLocaleString("pt-BR", options2));
+        $('#pedido_otimiza_periodo').val(pedido_periodo.toLocaleString("pt-BR", options2));
+        $('#rca_inicial').html(rca_inicial.toLocaleString("pt-BR", options2));
+        $('#economia_mensal').html(economia_mensal.toLocaleString("pt-BR", options2));
+        $('#economia_periodo').html(economia_periodo.toLocaleString("pt-BR", options2));
+        $('#percentual_pedido').html(Number(economia_mensal/pedido).toLocaleString("pt-BR", options1));
+        $('#percentual_mensal').html(Number(economia_periodo/pedido_periodo).toLocaleString("pt-BR", options1));
+      });
+    });
+  </script>
+</body>
+</html>
